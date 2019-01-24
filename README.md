@@ -1,5 +1,4 @@
-# UNI
-The University Networking Interface
+# UNI (The University Networking Interface)
 
 ## Elevator Pitch 
 The elevator pitch as presented to John Braico:
