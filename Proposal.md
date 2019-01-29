@@ -41,23 +41,36 @@ React is much more focused on user interface unlike MeteorJS, Firebase and Angul
 
 ***Priority: High***	
 
-As a host, I would like to create an activity other users can see.
-As a host, I would like to specify the time and location of an activity.
-As an attendee or host, I would like to show my interests.
-As an attendee or host, I would like to see other users’ interests.
-As an attendee or host, I would like to see who is at an activity.
-As an attendee, I would like to state that I am attending an activity.
-As an attendee or host, I would like to state that I am at an activity.
-As an attendee, I would like to be notified about an activity that I will be interested in.
-As a host, I would like to be notified about a new attendee at my activity.
-As an attendee, I would like to see information about an activity.
+* As a host, I would like to create an activity other users can see.
+
+* As a host, I would like to specify the time and location of an activity.
+
+* As an attendee or host, I would like to show my interests.
+
+* As an attendee or host, I would like to see other users’ interests.
+
+* As an attendee or host, I would like to see who is at an activity.
+
+* As an attendee, I would like to state that I am attending an activity.
+
+* As an attendee or host, I would like to state that I am at an activity.
+
+* As an attendee, I would like to be notified about an activity that I will be interested in.
+
+* As a host, I would like to be notified about a new attendee at my activity.
+
+* As an attendee, I would like to see information about an activity.
+
 
 ***Priority: Medium***
 
-As an attendee or host, I would like to search for an activity which I may be interested in.
-As a host, I would like to invite people who I have previously invited to an activity.
+* As an attendee or host, I would like to search for an activity which I may be interested in.
+
+* As a host, I would like to invite people who I have previously invited to an activity.
+
 
 ***Priority: Low***
 
-As an attendee, I would like to rate an activity after attending.
-As an attendee, I would like to review a host after attending an activity.
+* As an attendee, I would like to rate an activity after attending.
+
+* As an attendee, I would like to review a host after attending an activity.
