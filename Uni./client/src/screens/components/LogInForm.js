@@ -42,6 +42,7 @@ export default class LogInForm extends React.Component {
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text style={styles.buttonText}>LOG IN</Text>
                 </TouchableOpacity>
+                <Text style={styles.clickableText} onPress={() => Linking.openURL('google.com')}>Not a member yet? Sign up!</Text>
             </View>
         )
     }
@@ -65,6 +66,13 @@ const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
         color: '#FFFFFF',
-        fontWeight: '700'
+        fontWeight: '700',
+    },
+    clickableText: {
+        color: '#FFF',
+        textDecorationLine: 'underline',
+        textAlign: 'center',
+        paddingVertical: 15,
+        fontSize: 20,
     }
 });
