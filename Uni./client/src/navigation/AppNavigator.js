@@ -3,7 +3,6 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import LogInScreen from '../screens/LogInScreen';
-import LogInForm from '../screens/components/LogInForm';
 
 export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.
