@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app_original');
 var debug = require('debug')('uni.:server');
 var http = require('http');
 
