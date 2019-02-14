@@ -52,7 +52,7 @@ class LogInScreen extends React.Component {
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('CurrentActivitiesScreen')} >LOG IN</Text>
                 </TouchableOpacity>
-                <Text style={styles.clickableText} onPress={() => Linking.openURL('google.com')}>Not a member yet? Sign up!</Text>
+                <Text style={styles.clickableText} onPress={() => this.props.navigation.navigate('SignUpScreen')}>Not a member yet? Sign up!</Text>
             </View>
             </KeyboardAvoidingView>
         )
