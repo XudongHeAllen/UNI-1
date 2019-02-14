@@ -59,5 +59,44 @@ export default StyleSheet.create({
         textAlign: 'center',
         paddingVertical: 15,
         fontSize: 20,
-    }
+    },
+    signUpContainer:{
+        flex: 1,
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#4db0f2',
+    },
+    signUpInput:{
+        width:200,
+        height:40,
+        fontSize:20,
+        color: '#000',
+
+    },
+    inputBox:{
+        padding: 5,
+        flexDirection:'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 280,
+        height: 50,
+        borderRadius: 8,
+        backgroundColor: '#CCFFFF',
+        marginBottom: 8,
+    },
+    button:{
+        height: 50,
+        width: 280,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 8,
+        backgroundColor: '#6699CC',
+        marginTop: 20,
+    },
+    btText:{
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: '700',
+    },
 });
