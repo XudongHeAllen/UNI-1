@@ -5,6 +5,7 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import LoginScreen from "./screens/LogInScreen";
 import CurrentActivitiesScreen from "./screens/CurrentActivitiesScreen";
+import SignUpScreen from './screens/SignUpScreen';
 
 
 class App extends React.Component {
@@ -22,6 +23,7 @@ class App extends React.Component {
 const MainNavigator = createStackNavigator({
   LoginScreen: LoginScreen,
   CurrentActivitiesScreen: CurrentActivitiesScreen,
+  SignUpScreen: SignUpScreen,
 });
 
 const AppRoot = createAppContainer(MainNavigator);

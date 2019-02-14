@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import{
+	Image,
+	KeyboardAvoidingView,
 	TouchableOpacity,
 	StyleSheet,
 	TextInput,
@@ -10,7 +12,7 @@ import{
 }from 'react-native';
 
 
-export default class RegisterScene extends Component{
+export default class RegisterScene extends React.Component {
 
 	userName= '';
 	emailAddress= '';
@@ -49,41 +51,56 @@ export default class RegisterScene extends Component{
 	*/
 
 	//regist button, check whether regist successful based on input data
-	register =() =>{
-		if(this.userName != '' && this.password !=''){
+	signUp =() =>{
+		if(this.userName != '' && this.password != ''){
 			if(this.userName != 'Admin'){
-				if(this.password == this.confirmPassword){
-					const {goBack} = this.props.navigation;
-					Alert.alert("Regist success, back to login");
-					//Alert.alert("Regist success, back to login",[{text: 'Verify', onPress: () => {goBack();}}]);
+				if(this.password === this.confirmPassword){
+					Alert.alert("Register Successful,Back to Login");
+					const {navigate} = this.props.navigation;
+					navigate('Login');
 				}else{
-					Alert.alert("Regist fail, two password dont match");
+					Alert.alert("Two password cannot match");
 				}
 			}else{
-				Alert.alert("Regist fail, not what i want");
+				Alert.alert("Please dont use Admin as userName");
 			}
 		}else{
-			Alert.alert("user name or password cannot be empty!");
+			Alert.alert("You missed something!");
 		}
 	};
+
+
+	confirm =() =>{
+		const{navigate} = this.props.navigation;
+		navigate('Login');
+	}
 
 
 	render(){
 		return (
 			<TouchableOpacity	//using touchable opacity as background
 				activeOpacity={1.0}	//when clicked change active 
-				onPress={this.blurTextInput} //add click event
-				style={styles.logInContainer}>
+				//onPress={this.blurTextInput} //add click event
+				style={styles.container}>
+				<KeyboardAvoidingView behavior = "padding" style = {styles.container}>
+				<View style={styles.logoContainer}>
+                    <Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
+                    <Text style={styles.title}>Uni.</Text>
+                </View>
 				<View
 					style={styles.inputBox}>
 					<TextInput
-						ref = "username"
+						ref = "userName"
 						onChangeText={this.onUserNameChanged} //add value changing event
 						style={styles.input}
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-						placeholderTextColor ={'#ccc'}
 						placeholder={'User ID'}
+						placeholderTextColor ={'#ccc'}
+						clearButtonMode="while-editing"
+						returnKeyType="next"
+						autoCapitalize='none' //cancel first letter capital
+						autoCorrect={false}
+						underlineColorAndroid={'transparent'} //cancel under line
+
 					/>
 				</View>
 				<View
@@ -92,10 +109,14 @@ export default class RegisterScene extends Component{
 						ref = "emailAddress"
 						onChangeText={this.onEmailAddressChanged} //add value changing event
 						style={styles.input}
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-						placeholderTextColor ={'#ccc'}
+						keyboardType="email-address"
 						placeholder={'Email Address'}
+						placeholderTextColor ={'#ccc'}
+						clearButtonMode="while-editing"
+						returnKeyType="next"
+						autoCapitalize='none' //cancel first letter capital
+						autoCorrect={false}
+						underlineColorAndroid={'transparent'} //cancel under line												
 					/>
 				</View>
 				<View
@@ -105,10 +126,13 @@ export default class RegisterScene extends Component{
 						onChangeText={this.onPasswordChanged} //add value changing event
 						style={styles.input}
 						secureTextEntry={true}
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
 						placeholderTextColor ={'#ccc'}
 						placeholder={'Password'}
+						returnKeyType="next"
+						autoCapitalize='none' //cancel first letter capital
+						underlineColorAndroid={'transparent'} //cancel under line
+						
+						
 					/>
 				</View>
 				<View
@@ -117,46 +141,54 @@ export default class RegisterScene extends Component{
 						ref = "confirmPassword"
 						onChangeText={this.onConfirmPasswordChanged} //add value changing event
 						style={styles.input}
+						placeholder={'Enter Password again'}
+						placeholderTextColor ={'#ccc'}
 						secureTextEntry={true}
+						returnKeyType="join"
 						autoCapitalize='none' //cancel first letter capital
 						underlineColorAndroid={'transparent'} //cancel under line
-						placeholderTextColor ={'#ccc'}
-						placeholder={'Enter Password again'}
+						
+						
 					/>
 				</View>
-
+				</KeyboardAvoidingView>
 				<TouchableOpacity
-					onPress={this.register}
+					onPress={this.signUp}
 					style={styles.button}>
 					<Text
-						style={styles.btText}>Sign On</Text>
+						style={styles.btText}>Sign Up</Text>
 				</TouchableOpacity>
+				<Text style={styles.clickableText} onPress={this.confirm}>Already have a account?? Login in!</Text>
+				
 			</TouchableOpacity>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	logInContainer:{
+	container:{
 		flex: 1,
+
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#4db0f2',
 	},
 	input:{
 		width:200,
 		height:40,
 		fontSize:20,
-		color: '#fff',
+		color: '#000',
+		
 	},
 	inputBox:{
+		padding: 5,
 		flexDirection:'row',
 		justifyContent: 'center',
         alignItems: 'center',
         width: 280,
         height: 50,
         borderRadius: 8,
-        backgroundColor: '#66f',
+        backgroundColor: '#CCFFFF',
         marginBottom: 8,
     },
     button:{
@@ -165,11 +197,36 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
-        backgroundColor: '#66f',
+        backgroundColor: '#6699CC',
         marginTop: 20,
     },
     btText:{
     	color: '#fff',
     	fontSize: 20,
+    	fontWeight: '700',
+    },
+    clickableText: {
+        color: '#FFF',
+        textDecorationLine: 'underline',
+        textAlign: 'center',
+        paddingVertical: 15,
+        fontSize: 15,
+    },
+    logoContainer: {
+        alignItems: 'center',
+        flexGrow: 1,
+        justifyContent: 'center'
+    },
+    logo: {
+        width: 100,
+        height: 100,
+    },
+    title: {
+        color: '#FFF',
+        marginTop: 10,
+        width: 160,
+        textAlign: 'center',
+        opacity: 0.9,
+        fontSize: 30
     }
 });
