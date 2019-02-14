@@ -10,6 +10,7 @@ import{
 	Alert,
 	Button
 }from 'react-native';
+import styles from '../assets/Styles.js';
 
 
 export default class RegisterScene extends React.Component {
@@ -57,7 +58,7 @@ export default class RegisterScene extends React.Component {
 				if(this.password === this.confirmPassword){
 					Alert.alert("Register Successful,Back to Login");
 					const {navigate} = this.props.navigation;
-					navigate('Login');
+					navigate('LogInScreen');
 				}else{
 					Alert.alert("Two password cannot match");
 				}
@@ -72,17 +73,16 @@ export default class RegisterScene extends React.Component {
 
 	confirm =() =>{
 		const{navigate} = this.props.navigation;
-		navigate('Login');
-	}
+		navigate('LoginScreen');
+	};
 
 
 	render(){
 		return (
 			<TouchableOpacity	//using touchable opacity as background
-				activeOpacity={1.0}	//when clicked change active 
-				//onPress={this.blurTextInput} //add click event
-				style={styles.container}>
-				<KeyboardAvoidingView behavior = "padding" style = {styles.container}>
+				activeOpacity={1.0}	//when clicked change active
+				style={styles.signUpContainer}>
+				<KeyboardAvoidingView behavior = "padding" style = {styles.signUpContainer}>
 				<View style={styles.logoContainer}>
                     <Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
                     <Text style={styles.title}>Uni.</Text>
@@ -92,7 +92,7 @@ export default class RegisterScene extends React.Component {
 					<TextInput
 						ref = "userName"
 						onChangeText={this.onUserNameChanged} //add value changing event
-						style={styles.input}
+						style={styles.signUpInput}
 						placeholder={'User ID'}
 						placeholderTextColor ={'#ccc'}
 						clearButtonMode="while-editing"
@@ -108,7 +108,7 @@ export default class RegisterScene extends React.Component {
 					<TextInput
 						ref = "emailAddress"
 						onChangeText={this.onEmailAddressChanged} //add value changing event
-						style={styles.input}
+						style={styles.signUpInput}
 						keyboardType="email-address"
 						placeholder={'Email Address'}
 						placeholderTextColor ={'#ccc'}
@@ -124,7 +124,7 @@ export default class RegisterScene extends React.Component {
 					<TextInput
 						ref = "password"
 						onChangeText={this.onPasswordChanged} //add value changing event
-						style={styles.input}
+						style={styles.signUpInput}
 						secureTextEntry={true}
 						placeholderTextColor ={'#ccc'}
 						placeholder={'Password'}
@@ -140,7 +140,7 @@ export default class RegisterScene extends React.Component {
 					<TextInput
 						ref = "confirmPassword"
 						onChangeText={this.onConfirmPasswordChanged} //add value changing event
-						style={styles.input}
+						style={styles.signUpInput}
 						placeholder={'Enter Password again'}
 						placeholderTextColor ={'#ccc'}
 						secureTextEntry={true}
@@ -164,69 +164,3 @@ export default class RegisterScene extends React.Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	container:{
-		flex: 1,
-
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#4db0f2',
-	},
-	input:{
-		width:200,
-		height:40,
-		fontSize:20,
-		color: '#000',
-		
-	},
-	inputBox:{
-		padding: 5,
-		flexDirection:'row',
-		justifyContent: 'center',
-        alignItems: 'center',
-        width: 280,
-        height: 50,
-        borderRadius: 8,
-        backgroundColor: '#CCFFFF',
-        marginBottom: 8,
-    },
-    button:{
-    	height: 50,
-        width: 280,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 8,
-        backgroundColor: '#6699CC',
-        marginTop: 20,
-    },
-    btText:{
-    	color: '#fff',
-    	fontSize: 20,
-    	fontWeight: '700',
-    },
-    clickableText: {
-        color: '#FFF',
-        textDecorationLine: 'underline',
-        textAlign: 'center',
-        paddingVertical: 15,
-        fontSize: 15,
-    },
-    logoContainer: {
-        alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
-    },
-    logo: {
-        width: 100,
-        height: 100,
-    },
-    title: {
-        color: '#FFF',
-        marginTop: 10,
-        width: 160,
-        textAlign: 'center',
-        opacity: 0.9,
-        fontSize: 30
-    }
-});
