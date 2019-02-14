@@ -14,11 +14,16 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../../components/StyledText';
+import {StackNavigator} from 'react-navigation';
 
 export default class LogInForm extends React.Component {
     state = {
         email: '',
         password: ''
+    };
+
+    static navigationOptions = {
+        title: 'LoginForm'
     };
 
     handleEmail = (text) => {
@@ -59,8 +64,8 @@ export default class LogInForm extends React.Component {
                     onChangeText = {this.handlePassword}
                 />
 
-                <TouchableOpacity style={styles.buttonContainer} onPress = {() => this.submitInformation(this.state.email, this.state.password)}>
-                    <Text style={styles.buttonText}>LOG IN</Text>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <Text style={styles.buttonText} >LOG IN</Text>
                 </TouchableOpacity>
                 <Text style={styles.clickableText} onPress={() => Linking.openURL('google.com')}>Not a member yet? Sign up!</Text>
             </View>

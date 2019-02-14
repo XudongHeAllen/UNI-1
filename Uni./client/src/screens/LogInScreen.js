@@ -16,13 +16,13 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class LogInScreen extends React.Component {
+class LogInScreen extends React.Component {
     render() {
         return(
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={styles.logoContainer}>
                     <Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
-                    <Text style={styles.title}>Uni.</Text>
+                    <Text style={styles.title} onPress={() => this.props.navigation.navigate('CurrentActivitiesScreen')} >Uni.</Text>
                 </View>
                 <View>
                     <LogInForm/>
@@ -31,6 +31,8 @@ export default class LogInScreen extends React.Component {
         )
     }
 }
+
+export default LogInScreen;
 
 const styles = StyleSheet.create({
     container: {
