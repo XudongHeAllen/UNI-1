@@ -11,6 +11,7 @@ import {
     KeyboardAvoidingView,
     StatusBar
 } from 'react-native';
+import styles from '../../assets/Styles.js';
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../../components/StyledText';
@@ -41,7 +42,7 @@ export default class LogInForm extends React.Component {
 
     render() {
         return(
-            <View style={styles.container}>
+            <View style={styles.logInFormContainer}>
                 <StatusBar barStyle="light-content"/>
                 <TextInput
                     style={styles.input}
@@ -73,31 +74,3 @@ export default class LogInForm extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-    },
-    input: {
-        height: 40,
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-        marginBottom: 10,
-        color: '#FFFFFF',
-        paddingHorizontal: 10,
-    },
-    buttonContainer: {
-        backgroundColor: '#2980b9',
-        paddingVertical: 15
-    },
-    buttonText: {
-        textAlign: 'center',
-        color: '#FFFFFF',
-        fontWeight: '700',
-    },
-    clickableText: {
-        color: '#FFF',
-        textDecorationLine: 'underline',
-        textAlign: 'center',
-        paddingVertical: 15,
-        fontSize: 20,
-    }
-});

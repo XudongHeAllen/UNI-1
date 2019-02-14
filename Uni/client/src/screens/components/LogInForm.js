@@ -18,7 +18,7 @@ import { MonoText } from '../../components/StyledText';
 export default class LogInForm extends React.Component {
     render() {
         return(
-            <View style={styles.container}>
+            <View style={styles.logInContainer}>
                 <StatusBar barStyle="light-content"/>
                 <TextInput
                     style={styles.input}
@@ -49,7 +49,7 @@ export default class LogInForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    logInContainer: {
         padding: 20,
     },
     input: {

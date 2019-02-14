@@ -19,7 +19,7 @@ import { MonoText } from '../components/StyledText';
 export default class LogInScreen extends React.Component {
     render() {
         return(
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <KeyboardAvoidingView behavior="padding" style={styles.logInContainer}>
                 <View style={styles.logoContainer}>
                     <Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
                     <Text style={styles.title}>Uni.</Text>
@@ -33,7 +33,7 @@ export default class LogInScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    logInContainer: {
         flex: 1,
         backgroundColor: '#4db0f2',
     },

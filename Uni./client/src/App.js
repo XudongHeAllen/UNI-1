@@ -29,7 +29,7 @@ export default AppRoot;
 
 
 const styles = StyleSheet.create({
-  container: {
+  logInContainer: {
     flex: 1,
     backgroundColor: '#fff',
   },

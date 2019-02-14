@@ -73,7 +73,7 @@ export default class RegisterScene extends Component{
 			<TouchableOpacity	//using touchable opacity as background
 				activeOpacity={1.0}	//when clicked change active 
 				onPress={this.blurTextInput} //add click event
-				style={styles.container}>
+				style={styles.logInContainer}>
 				<View
 					style={styles.inputBox}>
 					<TextInput
@@ -137,7 +137,7 @@ export default class RegisterScene extends Component{
 }
 
 const styles = StyleSheet.create({
-	container:{
+	logInContainer:{
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
