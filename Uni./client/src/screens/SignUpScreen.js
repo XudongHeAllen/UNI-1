@@ -58,7 +58,7 @@ export default class RegisterScene extends React.Component {
 				if(this.password === this.confirmPassword){
 					Alert.alert("Register Successful,Back to Login");
 					const {navigate} = this.props.navigation;
-					navigate('LogInScreen');
+					navigate('LoginScreen');
 				}else{
 					Alert.alert("Two password cannot match");
 				}
