@@ -62,18 +62,23 @@ router.post("/signup", function(req , res) {
 router.get('/login', function(req, res) {
     // let result = retrieve(user)
     MongoClient.connect(uri, function(err, client) {
-        const collection = client.db("Uni-Development-prod").collection("users");
-        collection.find(req.body).toArray(function(err, result) {
-            if (err)
-                throw err;
-            console.log(result);
-            if (result.length>0)
-                res.json({userName: result[0].userName});
-            else {
-                res.json({userName: null});
-            }
-            client.close();
-        });
+        const collection = client.db("Uni-Development").collection("users");
+        if (("userName" in req.body) && ("password" in req.body)){
+            collection.find(req.body).toArray(function(err, result) {
+                if (err)
+                    throw err;
+                console.log(result);
+                if (result.length>0)
+                    res.json({userName: result[0].userName});
+                else {
+                    res.json({userName: null});
+                }
+                client.close();
+            });
+        }
+        else{
+            res.json({userName: null});
+        }
     });
 
 });
