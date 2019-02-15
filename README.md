@@ -28,3 +28,8 @@ Scan the QR code using phone. Note: Expo must be installed on the phone for test
 ## Run the backend by navigating into backend/Uni. directory and type the following command:
 
 `node app.js` 
+
+
+## AWS instance can be accessed through the following link:
+
+[Uni.](http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:3000)
