@@ -1,64 +1,37 @@
-import React, { Component } from 'react';
+/*App.js is going to be a router dispatcher*/
+import React from 'react'
+import { Form, Grid, Segment, Container } from 'semantic-ui-react'
 
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import { Button, Form, Grid, Segment } from 'semantic-ui-react'
+const App = () => (
+    <Segment placeholder >
+        <Grid style={{height: '100vh'}}>
+            <Grid.Column width={8} color={'blue'}>
+                <Container textAlign='center'>
+                    <h1 style={{height: '20vh'}}>Uni.</h1>
+                    <h1 style={{height: '10vh'}}>Follow your interests</h1>
+                    <h1 style={{height: '10vh'}}>Safe and monitored environment</h1>
+                    <h1 style={{height: '10vh'}}>Meet people</h1>
+                    <h1 style={{height: '10vh'}}>Join the conversation</h1>
+                </Container>
+            </Grid.Column>
 
+            <Grid.Column width={8} verticalAlign='middle'>
+                <Form>
+                    <Form.Input icon='user' iconPosition='left' label='Username' placeholder='Username' />
+                    <Form.Input icon='lock' iconPosition='left' label='Password' type='password' />
+                    <button className='medium ui primary button'>Login</button>
+                    <br/>
+                    <button className="ui labeled icon primary button" size='huge'>
+                        <i className="chess rook icon"></i>
+                        Sign UP
+                    </button>
 
-class App extends Component{
-    render() {
-        return (
-            <div className= 'ui placeholder segment'  >
-                <div className='ui two column stackable center aligned grid' >
-                    <div  className = 'B'  >
+                </Form>
+            </Grid.Column>
 
-                        <div className = 'App-header1'>
-                            <h1> UNI. </h1>
-                            <div className="ui list">
-                                <div className="item" id = "a">
-                                    <i className="search icon"/>
-                                    <div className="content">
-                                        Follow your interests
-                                    </div>
-                                </div>
-                                <div className="item" id = "a">
-                                    <i className="university icon"/>
-                                    <div className="content">
-                                        Safe and monitored envirnoment.
-                                    </div>
-                                </div>
-                                <div className="item" id = "a">
-                                    <i className="users icon"/>
-                                    <div className="content">
-                                        Meet people.
-                                    </div>
-                                </div>
-                                <div className="item" id = "a">
-                                    <i className="conversation icon"/>
-                                    <div className="content">
-                                        Join the conversion
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        </Grid>
 
-                    </div>
-                    <div  className = 'B'  >
-                        <div className = 'App-header'>
-                            <Form  className ='B' >
-                                <Form.Input icon='user' iconPosition='left' label='Username' placeholder='Username' />
-                                <Form.Input icon='lock' iconPosition='left' label='Password' type='password' />
+    </Segment>
+)
 
-                                <Button content='Login' primary />
-                            </Form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        );
-    }
-}
-
-export default App;
-
+export default App
