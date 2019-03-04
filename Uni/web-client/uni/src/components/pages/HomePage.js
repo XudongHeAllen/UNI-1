@@ -27,6 +27,12 @@ class HomePage extends React.Component{
         if(Object.keys(errors).length === 0){
             //TODO: DO NOT KNOW HOW RIGHT NOW.
             //watch video starts from 32:50
+            //this.props.history.push('/user');
+            this.props.history.push({
+                pathname: '/user',
+                //search: '?query=abc',
+                state: { detail: this.state.data }
+            });
         }
     };
 
