@@ -30,7 +30,7 @@ router.post("/signup", function(req , res) {
             var str = req.body.email.substring(i, req.body.email.length);
             if (str == "@myumanitoba.ca") {
                 MongoClient.connect(uri, function(err, client) {
-                    const collection = client.db("Uni-Development-prod").collection("users");
+                    const collection = client.db("Uni-Development").collection("users");
                     collection.insertOne(req.body, function(err, result) {
                         if (result.insertedCount > 0) {
                             console.log("1 document inserted...");
