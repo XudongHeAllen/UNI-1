@@ -16,6 +16,10 @@ class UserPage extends React.Component {
         return (
             <Segment>
                 <h2>welcome, {this.props.location.state.detail.username}!</h2>
+                {/*
+                    TODO: wait for backend done.
+                    we need to send get request to server, then server fetches data from mongoDB
+                */}
                 <h1>There are no activities going on now.</h1><br/>
                 <button className='medium ui primary button'>
                     Create Activity
@@ -28,3 +32,7 @@ class UserPage extends React.Component {
 }
 
 export default UserPage
+/*
+npm install --save axios
+create an instance of axios
+ */

@@ -1,6 +1,7 @@
 import React from "react"
 import {Segment, Grid, Container, Form } from "semantic-ui-react"
 import InlineError from "../messages/InlineError"
+import axios from "../../axios_def"
 //import { withRouter } from 'react-router-dom'
 
 //this is a function component
@@ -23,7 +24,23 @@ class HomePage extends React.Component{
         const errors = this.validate(this.state.data);
         //set to the state
         this.setState({errors});
-        //if no error submit to backend.
+
+        //send post request
+        const temp={
+            userName:'TestQi1',
+            password:'theManQ',
+            email:'idk@umanitoba.ca'
+        };
+
+        //we may try when the real server is running. it does not work in local machine using two ports somehow.
+        axios.get('/users').then(response => console.log(response));
+        /*
+        axios.post('/users/signup',temp)//default url gets appended
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
+            */
+
+        //if no error(and username and password are valid) submit to backend.
         if(Object.keys(errors).length === 0){
             //TODO: DO NOT KNOW HOW RIGHT NOW.
             //watch video starts from 32:50
