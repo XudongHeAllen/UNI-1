@@ -13,20 +13,28 @@ signToken = user => {
 
 
 module.exports = {
-    //experts a user email and password from all new users
+    //exports a username,  email and password from all new users
     signUp: async (req, res , next) => {
         
-       const {email, password}= req.value.body;
+       const {username, email, password}= req.value.body;
 
-       //check for users with thesame email
-        const foundUser = await User.findOne({ email: email});
-        if(foundUser) {
+        //check for users with the same email
+        //check for users with the same email
+        const foundUserName = await User.findOne({ username: username});
+        const foundUserEmail = await User.findOne({ email: email});
+
+        if(foundUserName && foundUserEmail) {
+            return res.status(403).json({error: 'Username annd Email address already exist'});
+
+        } else if(foundUserName) {
+            return res.status(403).json({error: 'Select a new username, this username already exist'});
+        } else if(foundUserEmail) {
             return res.status(403).json({error: 'Email address already exist'});
-        }
- 
+        } 
 
-       //create new user if user email is specific
+       //create new user if username and email is specific
        const newUser = new User({
+           username: username,
            email: email,
            password: password
        });
@@ -40,17 +48,27 @@ module.exports = {
        
        //generate the token
        const token = signToken(newUser);
-       res.status(200).json({ token: token});
+       res.status(200).json({
+            user: 'new user successfully created',
+            token: token
+        });
     },
 
     signIn: async (req, res , next) => {
         //generate a token to validate 
-        
         const token = signToken(req.user);
         res.status(200).json({token});
     },
 
     secret: async (req, res , next) => {
+
+        // passport.authenticate('jwt', {session: false}, (err, user, info) => {
+        //     if (err || !user) {
+        //         return res.status(400).json({
+        //             message: 'Something is not right',
+        //             user   : user
+        //         });
+        //     }});
         console.log('I managed to get here');
         res.json({ secret: "resource"});
     }

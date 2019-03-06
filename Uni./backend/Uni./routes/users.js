@@ -16,7 +16,7 @@ router.route('/signin')
   .post(validateBody(schemas.authSchema),passport.authenticate('local', {session: false}), UsersController.signIn);
 
 router.route('/secret')
-  .get(passport.authenticate('jwt', {session: false}),UsersController.secret);
+  .get(passport.authenticate('jwt', {session: false} ),UsersController.secret);
 
 
   module.exports = router;

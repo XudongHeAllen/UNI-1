@@ -28,3 +28,8 @@ var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log("Express server is listening on port", port);
 })
+
+//Todo: Add username to users and save to database
+//Todo: Make sure the data base is required for signup
+//Todo: Make sure the username is unique
+//Todo: Include appropriate error and success messages

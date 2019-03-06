@@ -8,6 +8,12 @@ const Schema = mongoose.Schema;
 
 //create a schema
 const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true //mongoose is case sensitive
+    },
     email: {
         type: String,
         required: true,
