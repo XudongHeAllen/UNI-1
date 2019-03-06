@@ -1,5 +1,5 @@
 'use strict';
-
+const JWT = require('jsonwebtoken');
 var express = require("express");
 var router = express.Router();
 
@@ -43,6 +43,10 @@ router.post("/signup", function(req , res) {
                         res.json({success: responseVar,
                                   info: "success",
                                   body:req.body});
+                        // JWT.sign({
+                        //     iss: 'UNI',
+                        //     sub: req.body._id;
+                        // }, '')
 
                         client.close();
                     });
