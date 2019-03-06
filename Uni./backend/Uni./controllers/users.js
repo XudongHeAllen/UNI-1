@@ -30,6 +30,8 @@ module.exports = {
            email: email,
            password: password
        });
+
+
        await newUser.save();
 
 
@@ -43,10 +45,13 @@ module.exports = {
 
     signIn: async (req, res , next) => {
         //generate a token to validate 
-        console.log('UserController.signIn() called');
+        
+        const token = signToken(req.user);
+        res.status(200).json({token});
     },
 
     secret: async (req, res , next) => {
-        console.log('UserController.secret() called');
+        console.log('I managed to get here');
+        res.json({ secret: "resource"});
     }
 }
