@@ -1,6 +1,7 @@
 const JWT = require('jsonwebtoken');
 const User = require('../models/users');
 const { JWT_SECRET } = require('../configuration');
+const passport = require('passport');
 
 signToken = user => {
     return JWT.sign({
@@ -55,21 +56,21 @@ module.exports = {
     },
 
     signIn: async (req, res , next) => {
-        //generate a token to validate 
-        const token = signToken(req.user);
-        res.status(200).json({token});
+        //generate a token to validate
+            const token = signToken(req.user);
+            res.status(200).json({token});
     },
 
     secret: async (req, res , next) => {
-
-        // passport.authenticate('jwt', {session: false}, (err, user, info) => {
-        //     if (err || !user) {
-        //         return res.status(400).json({
-        //             message: 'Something is not right',
-        //             user   : user
-        //         });
-        //     }});
+         passport.authenticate('jwt', {session: false}, (err, user, info) => {
+             if (err || !user) {
+                 return res.status(400).json({
+                     message: 'Something is not right',
+                     user   : user
+                 });
+             }
+         })(req, res, next);
         console.log('I managed to get here');
-        res.json({ secret: "resource"});
+        //res.json({ secret: "resource"});
     }
 }
