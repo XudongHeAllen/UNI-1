@@ -25,12 +25,18 @@ module.exports = {
         const foundUserEmail = await User.findOne({ email: email});
 
         if(foundUserName && foundUserEmail) {
-            return res.status(403).json({error: 'Username annd Email address already exist'});
+            return res.status(403).json({
+                success: false,
+                info: 'Username annd Email address already exist'});
 
         } else if(foundUserName) {
-            return res.status(403).json({error: 'Select a new username, this username already exist'});
+            return res.status(403).json({
+                success: false,
+                info: 'Select a new username, this username already exist'});
         } else if(foundUserEmail) {
-            return res.status(403).json({error: 'Email address already exist'});
+            return res.status(403).json({
+                success: false,
+                info: 'Email address already exist'});
         } 
 
        //create new user if username and email is specific
@@ -43,34 +49,63 @@ module.exports = {
 
        await newUser.save();
 
-
        //respond with token instead of json
-       //res.json({user: 'successfully created'});
-       
        //generate the token
        const token = signToken(newUser);
        res.status(200).json({
-            user: 'new user successfully created',
-            token: token
+            success: true,
+            info: 'new user successfully created',
+            token: token,
+            user: {username, email}
         });
     },
 
     signIn: async (req, res , next) => {
-        //generate a token to validate
-            const token = signToken(req.user);
-            res.status(200).json({token});
+        passport.authenticate('local', {session: false}, (err, user, info)=>{
+            if (err){
+                return res.status(500).json({
+                   success:false,
+                   info: err
+                });
+            }
+            else if (!user){
+                return res.status(400).json({
+                    success: false,
+                    info: info.message,
+                    user   : null,
+                });
+            }else{
+                //generate a token to validate
+                const token = signToken(user);
+                res.status(200).json({
+                    token,
+                    success: true,
+                    user: { _id: user.id}
+                });
+            }
+        })(req, res, next);
     },
 
     secret: async (req, res , next) => {
          passport.authenticate('jwt', {session: false}, (err, user, info) => {
-             if (err || !user) {
-                 return res.status(400).json({
-                     message: 'Something is not right',
-                     user   : user
+             if (err){
+                 return res.status(500).json({
+                     success:false,
+                     info: err
                  });
              }
+             else if (!user) {
+                 return res.status(401).json({
+                     success: false,
+                     user: user,
+                     info: info.message
+                 });
+             }else{
+                 console.log('I managed to get here');
+                 return res.status(200).json({
+                     success: true,
+                     secret: "resource"});
+             }
          })(req, res, next);
-        console.log('I managed to get here');
-        //res.json({ secret: "resource"});
     }
 }

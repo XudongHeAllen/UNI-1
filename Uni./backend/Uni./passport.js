@@ -15,7 +15,7 @@ passport.use( new JwrStrategy({
         //if user doesnt exist, handle it
         const user = await User.findById(payload.sub);
         if(!user) {
-            return done(null, false);
+            return done(null, false, {message: "Unknown user"});
         }
         //otherwise, return the user
         done(null, user);
@@ -34,7 +34,7 @@ passport.use(new LocalStrategy({
         const user = await User.findOne({email: email});
         //if not, handle it
         if(!user) {
-            return done(null, false);
+            return done(null, false, {message: "User with specified email does not exist."});
         }
 
         //check if the password is correct
@@ -42,12 +42,12 @@ passport.use(new LocalStrategy({
 
         //if not, handle it
         if(!isMatch) {
-            return done(null, false);
+            return done(null, false, {message: "Incorrect password."});
         }
 
 
         //otherwise, return the user
-        done(null, user);
+        done(null, user, {message: "successfully logged in."});
     } catch (error) {
         done(error, false);
     }
