@@ -15,10 +15,18 @@ module.exports = {
     },
 
     schemas: {
-        authSchema: Joi.object().keys({
+        authSchema: Joi.object().keys(),
             username: Joi.string().required(),
             email: Joi.string().email().required(),
             password: Joi.string().required()
-        })
+     },
+
+    activitySchema: {
+            authSchema: Joi.object().keys(),
+                activity_datetime: Joi.string().required(),
+                category: Joi.string().required(),
+                description: Joi.string().required(),
+                max_attendance: Joi.number().integer(),
+                title: Joi.string().required(),
     }
 }

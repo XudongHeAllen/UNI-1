@@ -23,7 +23,10 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    } 
+    },
+    my_activities: {
+        type: Array
+    }
 });
 
 userSchema.pre('save', async function(next) {
@@ -41,7 +44,7 @@ userSchema.pre('save', async function(next) {
 });
 
 //validates password
-userSchema.methods.isValidPassword = async function(newPassword) {
+userSchema.methods.isValidPassword = async function(newPassword, res) {
     try {
         return await bcrypt.compare(newPassword, this.password );
     } catch(error) {

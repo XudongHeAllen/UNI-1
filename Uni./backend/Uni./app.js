@@ -21,6 +21,7 @@ app.use(bodyParser.json());//parsing the json object
 
 //routes
 app.use('/users', require('./routes/users'));
+app.use('/activities', require('./routes/activities'));
 
 //start the server 
 var port = process.env.PORT || 3000;
