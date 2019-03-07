@@ -15,7 +15,7 @@ passport.use( new JwrStrategy({
         //if user doesnt exist, handle it
         const user = await User.findById(payload.sub);
         if(!user) {
-            return done(null, false);
+            return done(null, false) ;
         }
         //otherwise, return the user
         done(null, user);
@@ -28,12 +28,13 @@ passport.use( new JwrStrategy({
 //LOCAL STRATEGY
 passport.use(new LocalStrategy({
     usernameField: 'email'
-}, async (email, password, done) => {
+}, async ( email, password, done) => {
     try {
         //find the user given the email 
         const user = await User.findOne({email: email});
         //if not, handle it
         if(!user) {
+            console.log('email is not valid');
             return done(null, false);
         }
 
@@ -42,14 +43,19 @@ passport.use(new LocalStrategy({
 
         //if not, handle it
         if(!isMatch) {
+            //res.json({user: 'this is wrong'});
+            // res.status(200).json({
+            //     email: 'please'
+            // });
+            console.log('password is not valid');
             return done(null, false);
         }
 
 
         //otherwise, return the user
-        done(null, user);
+         done(null, user);
     } catch (error) {
-        done(error, false);
+         done(error, false );
     }
 
 }));
