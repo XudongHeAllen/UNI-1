@@ -19,7 +19,4 @@ router.route('/signin')
 router.route('/secret')
   .get(UsersController.secret);
 
-
-
-
   module.exports = router;

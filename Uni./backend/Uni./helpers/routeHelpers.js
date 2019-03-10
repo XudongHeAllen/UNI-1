@@ -23,7 +23,8 @@ module.exports = {
 
     activitySchema: {
             authSchema: Joi.object().keys(),
-                activity_datetime: Joi.string().required(),
+                activity_datetime: Joi.date().iso().required(),
+                attendance_list: Joi.array().required(),
                 category: Joi.string().required(),
                 description: Joi.string().required(),
                 max_attendance: Joi.number().integer(),

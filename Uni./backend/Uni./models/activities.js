@@ -7,12 +7,11 @@ const Schema = mongoose.Schema;
 */
 
 //create a schema //find{}
-const userSchema = new Schema({
+const activitySchema = new Schema({
     activity_datetime: {
-        type: String,
+        type: Date,
         //default: Date.now,
         required: true,
-        
     },
     category: {
         type: String,
@@ -29,7 +28,16 @@ const userSchema = new Schema({
     title: {
         type: String,
         required: true,
+    },
+    attendance_list: {
+        type: Array,
+        required: true
+    },
+    datetime_created:{
+        type: Date,
+        default: new Date()
     }
+
 });
 
 
@@ -39,6 +47,6 @@ const userSchema = new Schema({
 //first arguement is name of our model(always use a singular)
 //mongoose takes the name and makes it plural
 //second arguement is the schema we created 
-const Activity = mongoose.model('activity', userSchema)
+const Activity = mongoose.model('activity', activitySchema)
 //export the model
 module.exports = Activity;
