@@ -212,7 +212,7 @@ HTTP 200 Content-Type: application/json
 ### Request
 
 ```
-GET /activities/activity/create
+POST /activities/activity/create
 ```
 
 This endpoint will add a new activity to the database, and return the id of the activity.
@@ -220,7 +220,7 @@ This endpoint will add a new activity to the database, and return the id of the 
 #### Example Request
 
 ```javascript
-GET /activities/activity/create
+POST /activities/activity/create
 Accept: application/json
 ```
 
