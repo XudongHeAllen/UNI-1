@@ -61,11 +61,12 @@ export default class CurrentActivitiesScreen extends React.Component {
             value: 'Studying',
         }];
         return (
-            <View style={styles.container}>
+            <View>
                 <Dropdown
                     label='Activity type'
                     data={data}
                 />
+
                 <FlatList
                     data={this.state.data}
                     renderItem={({item}) => (
