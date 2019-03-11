@@ -221,6 +221,20 @@ This endpoint will add a new activity to the database, and return the id of the 
 
 ```javascript
 GET /activities/activity/create
+Accept: application/json
+```
+
+#### Payload:
+
+```json
+{
+	"attendance_list":[],
+	"category":"sports",
+	"activity_datetime": "2019-03-05 01:11:49.334",
+	"max_attendance":6,
+	"description": "This is where you should be",
+	"title": "Where it's at"
+}
 ```
 **Note that this endpoint DOES require authorization.**
 
