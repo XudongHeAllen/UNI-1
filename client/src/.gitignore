@@ -1,0 +1,14 @@
+.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+package-lock.json
+.DS_STORE
+*.log
+*.zip
+
+node_modules
+
+.idea/
