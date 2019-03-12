@@ -102,10 +102,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
-<<<<<<< HEAD
-                            onPress={() => this.props.navigation.navigate('ActivityDetailsScreen', {test: 1, me: "Buhle"})}
-=======
-                            onPress={() => this.props.navigation.navigate('SettingsScreen',
+                            onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
                             {
                                 activity_datetime: item.activity_datetime,
                                 category: item.category,
@@ -115,7 +112,6 @@ export default class CurrentActivitiesScreen extends React.Component {
                                 attendance_list: item.attendance_list,
                                 datetime_created: item.datetime_created,
                             })}
->>>>>>> current_activities_screen
                         />
                     )}
                 />
