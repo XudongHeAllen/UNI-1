@@ -1,126 +1,420 @@
 import React from "react"
-import {Segment, Grid, Container, Form } from "semantic-ui-react"
-import InlineError from "../messages/InlineError"
-import axios from "../../axios_def"
-//import { withRouter } from 'react-router-dom'
+import {Segment, Grid } from "semantic-ui-react"
+import '../_loginSty.scss';
+import FadeTransition from "../transitions/fadeTransition.jsx";
+import {Redirect} from 'react-router-dom'
 
-//this is a function component
 class HomePage extends React.Component{
-    state={
-        data:{
-            username:'',
-            password:''
-        },
-        loading:false,
-        errors:{}
-    };
 
-    onChange = e => this.setState({ data: {...this.state.data,
-        [e.target.name]: e.target.value}
-    });
-
-    //validate data, pass it to submit function(backend),handle error cases.
-    onSubmit = () => {
-        const errors = this.validate(this.state.data);
-        //set to the state
-        this.setState({errors});
-
-        //send post request
-        const temp={
-            userName:'TestQi1',
-            password:'theManQ',
-            email:'idk@umanitoba.ca'
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoginOpen: true,
+            isRegisterOpen: false
         };
+    }
+    showLoginBox() {
+        this.setState({isLoginOpen: true, isRegisterOpen: false});
+    }
 
-        //we may try when the real server is running. it does not work in local machine using two ports somehow.
-        axios.get('/users').then(response => console.log(response));
-        /*
-        axios.post('/users/signup',temp)//default url gets appended
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
-            */
-
-        //if no error(and username and password are valid) submit to backend.
-        if(Object.keys(errors).length === 0){
-            //TODO: DO NOT KNOW HOW RIGHT NOW.
-            //watch video starts from 32:50
-            //this.props.history.push('/user');
-            this.props.history.push({
-                pathname: '/user',
-                //search: '?query=abc',
-                state: { detail: this.state.data }
-            });
-        }
-    };
-
-    //implement late for all validations
-    //validate email needs to install validator. yarn add validator
-    //import validator from 'validator'
-    validate = () => {
-        const errors = {};
-        if(!this.state.data.username) errors.username = "username can not be empty";
-        if(!this.state.data.password) errors.password = "password can not be empty";
-        return errors
-    };
-
+    showRegisterBox() {
+        this.setState({isRegisterOpen: true, isLoginOpen: false});
+    }
     render()
     {
-        const { data, errors } = this.state;
         return (
             <Segment placeholder>
                 <Grid style={{height: '100vh'}}>
                     <Grid.Column width={8} color={'blue'}>
-                        <Container textAlign='center'>
-                            <h1 style={{height: '20vh'}}>Uni.</h1>
-                            <h1 style={{height: '10vh'}}>Follow your interests</h1>
-                            <h1 style={{height: '10vh'}}>Safe and monitored environment</h1>
-                            <h1 style={{height: '10vh'}}>Meet people</h1>
-                            <h1 style={{height: '10vh'}}>Join the conversation</h1>
-                        </Container>
+                        <div  className = 'B'  >
+
+                            <div className = 'App-header1'>
+                                <h1> UNI. </h1>
+                                <div className="ui list">
+                                    <div className="item" id = "a">
+                                        <i className="search icon"/>
+                                        <div className="content">
+                                            Follow your interests
+                                        </div>
+                                    </div>
+                                    <div className="item" id = "a">
+                                        <i className="university icon"/>
+                                        <div className="content">
+                                            Safe and monitored envirnoment.
+                                        </div>
+                                    </div>
+                                    <div className="item" id = "a">
+                                        <i className="users icon"/>
+                                        <div className="content">
+                                            Meet people.
+                                        </div>
+                                    </div>
+                                    <div className="item" id = "a">
+                                        <i className="conversation icon"/>
+                                        <div className="content">
+                                            Join the conversion
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </Grid.Column>
+                    <Grid.Column width={8}>
+                        <div className="root-container">
 
-                    <Grid.Column width={8} verticalAlign='middle'>
-                        <Form onSubmit = {this.onSubmit}>
-                            <Form.Field error={!!errors.username}>
-                                <Form.Input
-                                    icon='user'
-                                    iconPosition='left'
-                                    label='Username'
-                                    placeholder='Username'
-                                    name='username'
-                                    value={data.username}
-                                    onChange={this.onChange}
-                                />
-                                {errors.username && <InlineError text={ errors.username}/>}
-                            </Form.Field>
-                            <Form.Field error={!!errors.password}>
-                                <Form.Input
-                                    icon='lock'
-                                    iconPosition='left'
-                                    label='Password'
-                                    type='password'
-                                    name='password'
-                                    placeholder='password'
-                                    value={data.password}
-                                    onChange={this.onChange}
-                                />
-                                {errors.password && <InlineError text={ errors.password}/>}
-                            </Form.Field>
-                            <button className='medium ui primary button'>
-                                Login
-                            </button>
-                            <br/>
-
-                        </Form>
-                        <button className="ui labeled icon primary huge button">
-                             <i className="chess rook icon"/>Sign UP
-                        </button>
+                            <div className="box-controller">
+                                <div
+                                    className={"controller " + (this.state.isLoginOpen
+                                        ? "selected-controller"
+                                        : "")}
+                                    onClick={this
+                                        .showLoginBox
+                                        .bind(this)}>
+                                    Login
+                                </div>
+                                <div
+                                    className={"controller " + (this.state.isRegisterOpen
+                                        ? "selected-controller"
+                                        : "")}
+                                    onClick={this
+                                        .showRegisterBox
+                                        .bind(this)}>
+                                    Register
+                                </div>
+                            </div>
+                            <FadeTransition isOpen={this.state.isLoginOpen} duration={500}>
+                                <div className="box-container">
+                                    <LoginBox/>
+                                </div>
+                            </FadeTransition>
+                            <FadeTransition isOpen={this.state.isRegisterOpen} duration={500}>
+                                <div className="box-container">
+                                    <RegisterBox/>
+                                </div>
+                            </FadeTransition>
+                        </div>
                     </Grid.Column>
                 </Grid>
             </Segment>
         )
     }
 }
+class LoginBox extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            toUserPage:false,
+            username: "",
+            password: "",
+            errors: []};
+    }
+    showValidationErr(elm, msg) {
+        this.setState((prevState) => ({
+            errors: [
+                ...prevState.errors, {
+                    elm,
+                    msg
+                }
+            ]
+        }));
+    }
+
+    clearValidationErr(elm) {
+        this.setState((prevState) => {
+            let newArr = [];
+            for (let err of prevState.errors) {
+                if (elm !== err.elm) {
+                    newArr.push(err);
+                }
+            }
+            return {errors: newArr};
+        });
+    }
+
+    onUsernameChange(e) {
+        this.setState({username: e.target.value});
+        this.clearValidationErr("username");
+    }
+
+    onPasswordChange(e) {
+        this.setState({password: e.target.value});
+        this.clearValidationErr("password");
+    }
+
+    submitLogin() {
+        console.log(this.props);
+        if (this.state.username === "") {
+            this.showValidationErr("username", "Username Cannot be empty!");
+        }
+        if (this.state.password === "") {
+            this.showValidationErr("password", "Password Cannot be empty!");
+        }
+        if(this.state.password !== "" && this.state.username !== "" ) {
+            this.setState({toUserPage: true})
+        }
+
+    }
+
+    render() {
+        let usernameErr = null,
+            passwordErr = null;
+
+        for (let err of this.state.errors) {
+            if (err.elm === "username") {
+                usernameErr = err.msg;
+            }
+            if (err.elm === "password") {
+                passwordErr = err.msg;
+            }
+        }
+
+        if(this.state.toUserPage === true ){
+            return (<Redirect to = {{pathname : '/user' , state: { stateName: this.state.username}}}/>);
+        }
+        return (
+            <div className="inner-container">
+                <div className="header">
+                    Login
+                </div>
+                <div className="box">
+                    <div className="input-group">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            name="username"
+                            className="login-input"
+                            placeholder="Username"
+                            onChange={this
+                                .onUsernameChange
+                                .bind(this)}/>
+                        <small className="danger-error">{usernameErr
+                            ? usernameErr
+                            : ""}</small>
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            className="login-input"
+                            placeholder="Password"
+                            onChange={this
+                                .onPasswordChange
+                                .bind(this)}/>
+                        <small className="danger-error">{passwordErr
+                            ? passwordErr
+                            : ""}</small>
+                    </div>
+                    <button
+                        type="button"
+                        className="login-btn"
+                        onClick={this
+                            .submitLogin
+                            .bind(this)}>Login</button>
+                </div>
+            </div>
+        );
+    }
+
+}
+
+
+class RegisterBox extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            email: "",
+            password: "",
+            errors: [],
+            pwdState: null
+        };
+    }
+
+    showValidationErr(elm, msg) {
+        this.setState((prevState) => ({
+            errors: [
+                ...prevState.errors, {
+                    elm,
+                    msg
+                }
+            ]
+        }));
+    }
+
+    clearValidationErr(elm) {
+        this.setState((prevState) => {
+            let newArr = [];
+            for (let err of prevState.errors) {
+                if (elm !== err.elm) {
+                    newArr.push(err);
+                }
+            }
+            return {errors: newArr};
+        });
+    }
+
+    onUsernameChange(e) {
+        this.setState({username: e.target.value});
+        this.clearValidationErr("username");
+    }
+
+    onEmailChange(e) {
+        this.setState({email: e.target.value});
+        this.clearValidationErr("email");
+    }
+
+    onPasswordChange(e) {
+        this.setState({password: e.target.value});
+        this.clearValidationErr("password");
+
+        this.setState({pwdState: "weak"});
+        if (e.target.value.length > 8) {
+            this.setState({pwdState: "medium"});
+        } else if (e.target.value.length > 12) {
+            this.setState({pwdState: "strong"});
+        }
+
+    }
+
+    submitRegister() {
+
+        console.log(this.state);
+
+        if (this.state.username === "") {
+            this.showValidationErr("username", "Username Cannot be empty!");
+        }
+        if (this.state.email === "") {
+            this.showValidationErr("email", "Email Cannot be empty!");
+        }
+        if (this.state.password === "") {
+            this.showValidationErr("password", "Password Cannot be empty!");
+        }
+
+    }
+
+    render() {
+
+        let usernameErr = null,
+            passwordErr = null,
+            emailErr = null;
+
+        for (let err of this.state.errors) {
+            if (err.elm === "username") {
+                usernameErr = err.msg;
+            }
+            if (err.elm === "password") {
+                passwordErr = err.msg;
+            }
+            if (err.elm === "email") {
+                emailErr = err.msg;
+            }
+        }
+
+        let pwdWeak = false,
+            pwdMedium = false,
+            pwdStrong = false;
+
+        if (this.state.pwdState === "weak") {
+            pwdWeak = true;
+        } else if (this.state.pwdState === "medium") {
+            pwdWeak = true;
+            pwdMedium = true;
+        } else if (this.state.pwdState === "strong") {
+            pwdWeak = true;
+            pwdMedium = true;
+            pwdStrong = true;
+        }
+
+        return (
+            <div className="inner-container">
+                <div className="header">
+                    Register
+                </div>
+                <div className="box">
+                    <div className="input-group">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            name="username"
+                            className="login-input"
+                            placeholder="Username"
+                            onChange={this
+                                .onUsernameChange
+                                .bind(this)}/>
+                        <small className="danger-error">{usernameErr
+                            ? usernameErr
+                            : ""}</small>
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="text"
+                            name="email"
+                            className="login-input"
+                            placeholder="Email"
+                            onChange={this
+                                .onEmailChange
+                                .bind(this)}/>
+                        <small className="danger-error">{emailErr
+                            ? emailErr
+                            : ""}</small>
+                    </div>
+
+                    <div className="input-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            className="login-input"
+                            placeholder="Password"
+                            onChange={this
+                                .onPasswordChange
+                                .bind(this)}/>
+                        <small className="danger-error">{passwordErr
+                            ? passwordErr
+                            : ""}</small>
+
+                        {this.state.password && <div className="password-state">
+                            <div
+                                className={"pwd pwd-weak " + (pwdWeak
+                                    ? "show"
+                                    : "")}></div>
+                            <div
+                                className={"pwd pwd-medium " + (pwdMedium
+                                    ? "show"
+                                    : "")}></div>
+                            <div
+                                className={"pwd pwd-strong " + (pwdStrong
+                                    ? "show"
+                                    : "")}></div>
+                        </div>}
+
+                    </div>
+
+                    <button
+                        type="button"
+                        className="login-btn"
+                        onClick={this
+                            .submitRegister
+                            .bind(this)}>Register</button>
+
+
+                </div>
+            </div>
+
+        );
+
+    }
+
+}
+
+
 
 export default HomePage
 
