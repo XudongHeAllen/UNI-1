@@ -39,7 +39,8 @@ export default class CurrentActivitiesScreen extends React.Component {
                     onPress={() => navigation.navigate('NewActivityScreen')}
                 >
                     <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
-                </TouchableOpacity>
+                </TouchableOpacity
+>
             ),
         };
     };
@@ -115,6 +116,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                         />
                     )}
                 />
+
             </View>
         )
     }
