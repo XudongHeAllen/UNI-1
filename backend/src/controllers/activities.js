@@ -27,21 +27,29 @@ module.exports = {
     },
 
     activityId: async (req, res, next) => {
-        const query = {_id: new ObjectId(req.params.id)};
-        await Activity.find(query, function (err, activity){
-            if(err) {
+        try {
+            const query = {_id: new ObjectId(req.params.id)};
+            await Activity.find(query, function (err, activity) {
+                if (err) {
+                    res.json({
+                        success: false,
+                        info: "Something went terribly wrong"
+                    });
+                    next();
+                }
                 res.json({
-                    success: false,
-                    info: "Something went terribly wrong"
-                });
-                next();
-            }
-            res.json({
-                success: true,
-                info: "Successfully found required activity",
-                activity: activity[0]
+                    success: true,
+                    info: "Successfully found required activity",
+                    activity: activity[0]
+                })
             })
-        })
+        } catch(err){
+            res.status(400).json({
+                success: false,
+                info: err.message,
+                activity: null
+            })
+        }
     },
 
     activityCreateId: async (req, res, next) => {
