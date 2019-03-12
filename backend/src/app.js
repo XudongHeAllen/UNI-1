@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const passportConf = require('./passport');
 var mongoose = require('mongoose');
 
+const cors = require('cors');
 
 mongoose.connect("mongodb://testUser:testUser@cluster0-shard-00-00-twf8g.mongodb.net:27017," +
     "cluster0-shard-00-01-twf8g.mongodb.net:27017,cluster0-shard-00-02-twf8g.mongodb.net:27017/testing?" +
@@ -18,6 +19,7 @@ var app = express();
 //middlewares are run in sequence
 app.use(morgan('dev'));//morgan logs the calls to the routes
 app.use(bodyParser.json());//parsing the json object
+app.use(cors()); // Cross-origin handler
 
 //routes
 app.use('/users', require('./routes/users'));
