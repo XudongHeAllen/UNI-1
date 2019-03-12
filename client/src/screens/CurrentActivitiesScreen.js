@@ -95,7 +95,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
-                            onPress={() => this.props.navigation.navigate('SettingsScreen')}
+                            onPress={() => this.props.navigation.navigate('ActivityDetailsScreen', {test: 1, me: "Buhle"})}
                         />
                     )}
                 />

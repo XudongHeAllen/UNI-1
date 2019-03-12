@@ -6,6 +6,7 @@ import AppNavigator from './navigation/AppNavigator';
 import LoginScreen from "./screens/LogInScreen";
 import CurrentActivitiesScreen from "./screens/CurrentActivitiesScreen";
 import SignUpScreen from './screens/SignUpScreen';
+import ActivityDetailsScreen  from './screens/ActivityDetailsScreen';
 import SettingsScreen from "./screens/SettingsScreen";
 import NewActivityScreen from "./screens/NewActivityScreen";
 
@@ -27,6 +28,7 @@ const MainNavigator = createStackNavigator({
   CurrentActivitiesScreen: CurrentActivitiesScreen,
   SignUpScreen: SignUpScreen,
   SettingsScreen: SettingsScreen,
+  ActivityDetailsScreen: ActivityDetailsScreen,
   NewActivityScreen: NewActivityScreen,
 });
 
