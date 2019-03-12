@@ -7,10 +7,10 @@ import SignUpPage from "./components/pages/SignUpPage"
 
 const App = () => (
     <div>
-        <Route path={"/"} exact component={HomePage} />
-        <Route path={"/user"} exact component={UserPage} />
-        <Route path={"/signup"} exact component={SignUpPage} />
-    </div>
+    <Route path={"/"} exact component={HomePage} />
+<Route path={"/user"} exact component={UserPage} />
+<Route path={"/signup"} exact component={SignUpPage} />
+</div>
 );
 
 export default App;
