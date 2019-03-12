@@ -24,7 +24,7 @@ app.use('/users', require('./routes/users'));
 app.use('/activities', require('./routes/activities'));
 
 //start the server 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 
 app.listen(port, function () {
     console.log("Express server is listening on port", port);
