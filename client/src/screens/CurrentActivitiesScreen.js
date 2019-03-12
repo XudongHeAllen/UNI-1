@@ -73,18 +73,25 @@ export default class CurrentActivitiesScreen extends React.Component {
 
 
     render() {
-        let data = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
+        let activityTypes = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
+        let sortByCriteria = [{value: 'Time'}, {value: 'Location'}];
         return (
-            <View>
-                <View>
-                    <Dropdown style={{flex: 1}}
-                        label='Activity type'
-                        data={data}
-                    />
-                    <Dropdown style={{flex: 1}}
-                        label='Activity type'
-                        data={data}
-                    />
+            <View style={{flex: 1}}>
+                <View style={styles.dropdown}>
+                    <View style={{ flex: 1 }}>
+                        <Dropdown
+                            label='Activity Type'
+                            data={activityTypes}
+                        />
+                    </View>
+
+                    <View style={{ width: 96, marginLeft: 8 }}>
+                        <Dropdown
+                            label='Sort'
+                            data={sortByCriteria}
+                            propsExtractor={({ props }, index) => props}
+                        />
+                    </View>
                 </View>
 
                 <FlatList
@@ -95,7 +102,16 @@ export default class CurrentActivitiesScreen extends React.Component {
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
-                            onPress={() => this.props.navigation.navigate('SettingsScreen')}
+                            onPress={() => this.props.navigation.navigate('SettingsScreen',
+                            {
+                                activity_datetime: item.activity_datetime,
+                                category: item.category,
+                                description: item.description,
+                                max_attendance: item.max_attendance,
+                                title: item.title,
+                                attendance_list: item.attendance_list,
+                                datetime_created: item.datetime_created,
+                            })}
                         />
                     )}
                 />
