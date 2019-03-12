@@ -44,8 +44,6 @@ export default class CurrentActivitiesScreen extends React.Component {
             .then(res => res.json())
             .then(res => {
                 console.log("**************");
-                // console.log(res.activities[0].title);
-                // console.log(typeof res.activities[0].title);
                 this.setState({
                     data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
                     error: res.error || null,
@@ -60,7 +58,6 @@ export default class CurrentActivitiesScreen extends React.Component {
 
 
     render() {
-        // this.makeRemoteRequest();
         let data = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
         return (
             <View>
