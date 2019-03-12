@@ -12,22 +12,22 @@ class UserPage extends React.Component {
             { name: 'yinka', cate: 'study'},
             { name: 'cj', cate: 'soccer'}
         ]
-    }
+    };
 
     createActivityHandler = () => {
         alert('pop up create activity component!');
-    }
+    };
 
     showActivityHandler = () =>{
         alert('pop up this activity details(another component!)');
-    }
+    };
 
     render()
     {
         const data = this.state;
         return (
             <Segment>
-                <h2>welcome, {this.props.location.state.detail.username}!</h2>
+                <h2>welcome, {this.props.location.state.stateName}!</h2>
                 <button
                     className='medium ui primary button'
                     onClick={this.createActivityHandler}>
