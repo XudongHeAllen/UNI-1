@@ -10,6 +10,7 @@ import {
     KeyboardAvoidingView,
     FlatList,
     Picker,
+    Button,
 } from 'react-native';
 import styles from '../assets/Styles.js';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -29,6 +30,20 @@ export default class CurrentActivitiesScreen extends React.Component {
         };
     }
 
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerTitle: "Current Activities",
+            headerRight: (
+                <TouchableOpacity
+
+                    onPress={() => navigation.navigate('NewActivityScreen')}
+                >
+                    <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
+                </TouchableOpacity>
+            ),
+        };
+    };
+
     componentDidMount() {
         console.log("**************1");
         this.makeRemoteRequest();
@@ -37,7 +52,7 @@ export default class CurrentActivitiesScreen extends React.Component {
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
         // const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-        const url = 'http://99.79.39.110:3000/activities';
+        const url = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities';
         // this.setState({ loading: true });
 
         fetch(url)
@@ -74,11 +89,13 @@ export default class CurrentActivitiesScreen extends React.Component {
 
                 <FlatList
                     data={this.state.data}
+                    keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
                         <ListItem
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
+                            onPress={() => this.props.navigation.navigate('SettingsScreen')}
                         />
                     )}
                 />

@@ -6,6 +6,8 @@ import AppNavigator from './navigation/AppNavigator';
 import LoginScreen from "./screens/LogInScreen";
 import CurrentActivitiesScreen from "./screens/CurrentActivitiesScreen";
 import SignUpScreen from './screens/SignUpScreen';
+import SettingsScreen from "./screens/SettingsScreen";
+import NewActivityScreen from "./screens/NewActivityScreen";
 
 
 class App extends React.Component {
@@ -24,6 +26,8 @@ const MainNavigator = createStackNavigator({
   LoginScreen: LoginScreen,
   CurrentActivitiesScreen: CurrentActivitiesScreen,
   SignUpScreen: SignUpScreen,
+  SettingsScreen: SettingsScreen,
+  NewActivityScreen: NewActivityScreen,
 });
 
 const AppRoot = createAppContainer(MainNavigator);
