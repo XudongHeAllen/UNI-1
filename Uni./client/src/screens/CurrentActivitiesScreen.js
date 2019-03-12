@@ -30,19 +30,24 @@ export default class CurrentActivitiesScreen extends React.Component {
     }
 
     componentDidMount() {
+        console.log("**************1");
         this.makeRemoteRequest();
     }
 
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
-        const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-        this.setState({ loading: true });
+        // const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+        const url = 'http://99.79.39.110:3000/activities';
+        // this.setState({ loading: true });
 
         fetch(url)
             .then(res => res.json())
             .then(res => {
+                console.log("**************");
+                // console.log(res.activities[0].title);
+                // console.log(typeof res.activities[0].title);
                 this.setState({
-                    data: page === 1 ? res.results : [...this.state.data, ...res.results],
+                    data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
                     error: res.error || null,
                     loading: false,
                     refreshing: false
@@ -55,24 +60,27 @@ export default class CurrentActivitiesScreen extends React.Component {
 
 
     render() {
-        let data = [{
-            value: 'Sport',
-        }, {
-            value: 'Studying',
-        }];
+        // this.makeRemoteRequest();
+        let data = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
         return (
             <View>
-                <Dropdown
-                    label='Activity type'
-                    data={data}
-                />
+                <View>
+                    <Dropdown style={{flex: 1}}
+                        label='Activity type'
+                        data={data}
+                    />
+                    <Dropdown style={{flex: 1}}
+                        label='Activity type'
+                        data={data}
+                    />
+                </View>
 
                 <FlatList
                     data={this.state.data}
                     renderItem={({item}) => (
                         <ListItem
-                            title={`${item.name.first} ${item.name.last}`}
-                            subtitle={item.email}
+                            title={`${item.title} ${item.title}`}
+                            subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
                         />
                     )}
