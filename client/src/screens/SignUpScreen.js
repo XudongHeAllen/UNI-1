@@ -21,7 +21,7 @@ export default class RegisterScene extends React.Component {
 	confirmPassword='';
 
 	/**when value in inputBox changed, save changed value
-	*/
+	 */
 	onUserNameChanged = (newUserName) => {
 		console.log(newUserName);
 		this.userName = newUserName;
@@ -57,6 +57,7 @@ export default class RegisterScene extends React.Component {
 			if(this.userName != 'Admin'){
 				if(this.password === this.confirmPassword){
 					Alert.alert("Register Successful,Back to Login");
+					this.sendRequest();
 					const {navigate} = this.props.navigation;
 					navigate('LoginScreen');
 				}else{
@@ -76,6 +77,31 @@ export default class RegisterScene extends React.Component {
 		navigate('LoginScreen');
 	};
 
+	sendRequest =(enableCallback) =>{
+		Alert.alert("Create Activity Success!");
+		fetch('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities/activity/create',{
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+			},
+			body: JSON.stringify({
+				attendence_list: '',
+				category: 'sports',
+				activity_datetime: "2019-03-05 01:11:49.334",
+				max_attendance:6,
+				description: "This is where you should be",
+				title: "Where it's at"
+			})
+		}).then((response) => response.json())
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+
+	}
+
 
 	render(){
 		return (
@@ -83,74 +109,74 @@ export default class RegisterScene extends React.Component {
 				activeOpacity={1.0}	//when clicked change active
 				style={styles.signUpContainer}>
 				<KeyboardAvoidingView behavior = "padding" style = {styles.signUpContainer}>
-				<View style={styles.logoContainer}>
-                    <Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
-                    <Text style={styles.title}>Uni.</Text>
-                </View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "userName"
-						onChangeText={this.onUserNameChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholder={'User ID'}
-						placeholderTextColor ={'#ccc'}
-						clearButtonMode="while-editing"
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						autoCorrect={false}
-						underlineColorAndroid={'transparent'} //cancel under line
+					<View style={styles.logoContainer}>
+						<Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
+						<Text style={styles.title}>Uni.</Text>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "userName"
+							onChangeText={this.onUserNameChanged} //add value changing event
+							style={styles.signUpInput}
+							placeholder={'User ID'}
+							placeholderTextColor ={'#ccc'}
+							clearButtonMode="while-editing"
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							autoCorrect={false}
+							underlineColorAndroid={'transparent'} //cancel under line
 
-					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "emailAddress"
-						onChangeText={this.onEmailAddressChanged} //add value changing event
-						style={styles.signUpInput}
-						keyboardType="email-address"
-						placeholder={'Email Address'}
-						placeholderTextColor ={'#ccc'}
-						clearButtonMode="while-editing"
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						autoCorrect={false}
-						underlineColorAndroid={'transparent'} //cancel under line												
-					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "password"
-						onChangeText={this.onPasswordChanged} //add value changing event
-						style={styles.signUpInput}
-						secureTextEntry={true}
-						placeholderTextColor ={'#ccc'}
-						placeholder={'Password'}
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-						
-						
-					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "confirmPassword"
-						onChangeText={this.onConfirmPasswordChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholder={'Enter Password again'}
-						placeholderTextColor ={'#ccc'}
-						secureTextEntry={true}
-						returnKeyType="join"
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-						
-						
-					/>
-				</View>
+						/>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "emailAddress"
+							onChangeText={this.onEmailAddressChanged} //add value changing event
+							style={styles.signUpInput}
+							keyboardType="email-address"
+							placeholder={'Email Address'}
+							placeholderTextColor ={'#ccc'}
+							clearButtonMode="while-editing"
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							autoCorrect={false}
+							underlineColorAndroid={'transparent'} //cancel under line
+						/>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "password"
+							onChangeText={this.onPasswordChanged} //add value changing event
+							style={styles.signUpInput}
+							secureTextEntry={true}
+							placeholderTextColor ={'#ccc'}
+							placeholder={'Password'}
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							underlineColorAndroid={'transparent'} //cancel under line
+
+
+						/>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "confirmPassword"
+							onChangeText={this.onConfirmPasswordChanged} //add value changing event
+							style={styles.signUpInput}
+							placeholder={'Enter Password again'}
+							placeholderTextColor ={'#ccc'}
+							secureTextEntry={true}
+							returnKeyType="join"
+							autoCapitalize='none' //cancel first letter capital
+							underlineColorAndroid={'transparent'} //cancel under line
+
+
+						/>
+					</View>
 				</KeyboardAvoidingView>
 				<TouchableOpacity
 					onPress={this.signUp}
@@ -159,7 +185,7 @@ export default class RegisterScene extends React.Component {
 						style={styles.btText}>Sign Up</Text>
 				</TouchableOpacity>
 				<Text style={styles.clickableText} onPress={this.confirm}>Already have a account?? Login in!</Text>
-				
+
 			</TouchableOpacity>
 		);
 	}

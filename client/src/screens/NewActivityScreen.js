@@ -80,7 +80,7 @@ export default class NewActivityScreen extends React.Component {
 
 	sendRequest =(enableCallback) =>{
 		Alert.alert("Create Activity Success!");
-		fetch('http://99.79.39.110:3000/activities/activity/create',{
+		fetch('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities/activity/create',{
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
