@@ -8,8 +8,8 @@ export default class FadeTransition extends React.Component {
         super(props);
         //Default Style
         this.defaultStyle = {
-            transitionProperty: "opacity",
-            transition: `${this.props.duration}ms ease-in-out`
+            transitionProperty: "opacity"
+            // transition: `${this.props.duration}ms ease-in-out`
         };
         this.transitionStyle = {
             entering: {
@@ -17,7 +17,7 @@ export default class FadeTransition extends React.Component {
             },
             entered: {
                 opacity: "1",
-                transitionDelay: "700ms"
+                transitionDelay: "500ms"
             },
             exiting: {
                 opacity: "0"

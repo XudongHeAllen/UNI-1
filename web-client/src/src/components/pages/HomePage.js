@@ -3,6 +3,7 @@ import {Segment, Grid } from "semantic-ui-react"
 import '../_loginSty.scss';
 import FadeTransition from "../transitions/fadeTransition.jsx";
 import {Redirect} from 'react-router-dom'
+import axios from "../../axios_def"
 
 class HomePage extends React.Component{
 
@@ -24,11 +25,9 @@ class HomePage extends React.Component{
     {
         return (
             <Segment placeholder>
-                <Grid style={{height: '100vh'}}>
-                    <Grid.Column width={8} color={'blue'}>
-                        <div  className = 'B'  >
-
-                            <div className = 'App-header1'>
+                <Grid style={{height: '100vh'}} >
+                    <Grid.Column width={8} color={'blue'} >
+                        <div className = 'B'  >
                                 <h1> UNI. </h1>
                                 <div className="ui list">
                                     <div className="item" id = "a">
@@ -56,14 +55,11 @@ class HomePage extends React.Component{
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
                         </div>
-
-
                     </Grid.Column>
                     <Grid.Column width={8}>
                         <div className="root-container">
-
                             <div className="box-controller">
                                 <div
                                     className={"controller " + (this.state.isLoginOpen
@@ -84,12 +80,12 @@ class HomePage extends React.Component{
                                     Register
                                 </div>
                             </div>
-                            <FadeTransition isOpen={this.state.isLoginOpen} duration={500}>
+                            <FadeTransition isOpen={this.state.isLoginOpen} duration={300}>
                                 <div className="box-container">
                                     <LoginBox/>
                                 </div>
                             </FadeTransition>
-                            <FadeTransition isOpen={this.state.isRegisterOpen} duration={500}>
+                            <FadeTransition isOpen={this.state.isRegisterOpen} duration={300}>
                                 <div className="box-container">
                                     <RegisterBox/>
                                 </div>
@@ -107,9 +103,12 @@ class LoginBox extends React.Component {
         super(props);
         this.state = {
             toUserPage:false,
-            username: "",
+            email: "",
             password: "",
-            errors: []};
+            invalidUser:false,
+            errors: [],
+            token:null
+        };
     }
     showValidationErr(elm, msg) {
         this.setState((prevState) => ({
@@ -135,36 +134,50 @@ class LoginBox extends React.Component {
     }
 
     onUsernameChange(e) {
-        this.setState({username: e.target.value});
-        this.clearValidationErr("username");
+        this.setState({email: e.target.value, invalidUser: false});
+        // this.setState({});
+        this.clearValidationErr("email");
     }
 
     onPasswordChange(e) {
-        this.setState({password: e.target.value});
+        this.setState({password: e.target.value, invalidUser: false});
+        // this.setState({invalidUser: false});
         this.clearValidationErr("password");
     }
 
     submitLogin() {
         console.log(this.props);
-        if (this.state.username === "") {
-            this.showValidationErr("username", "Username Cannot be empty!");
+        if (this.state.email === "") {
+            this.showValidationErr("email", "Email Cannot be empty!");
         }
         if (this.state.password === "") {
             this.showValidationErr("password", "Password Cannot be empty!");
         }
-        if(this.state.password !== "" && this.state.username !== "" ) {
-            this.setState({toUserPage: true})
+        if(this.state.password !== "" && this.state.email !== "" ) {
+            const userInfo = {
+                email: this.state.email,
+                password: this.state.password
+            };
+            axios.post('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/users/signin', userInfo).then( (res) => {
+                if(res.data.success) {
+                    this.setState({token: res.data.token});
+                    this.setState({toUserPage: true});
+                }
+            }).catch(error => {
+                this.setState({invalidUser: true});
+                console.log(error.response)
+            });
         }
-
     }
 
     render() {
-        let usernameErr = null,
-            passwordErr = null;
+        let emailErr = null,
+            passwordErr = null,
+            invalidUserErr="";
 
         for (let err of this.state.errors) {
-            if (err.elm === "username") {
-                usernameErr = err.msg;
+            if (err.elm === "email") {
+                emailErr = err.msg;
             }
             if (err.elm === "password") {
                 passwordErr = err.msg;
@@ -172,26 +185,34 @@ class LoginBox extends React.Component {
         }
 
         if(this.state.toUserPage === true ){
-            return (<Redirect to = {{pathname : '/user' , state: { stateName: this.state.username}}}/>);
+            return (<Redirect to = {{pathname : '/user' , state: { stateName: this.state.email, token: this.state.token}}}/>);
         }
+
+        else if (this.state.invalidUser === true){
+            invalidUserErr = "Invalid Email address or Password." +
+                "Try again";
+        }
+
         return (
             <div className="inner-container">
                 <div className="header">
                     Login
                 </div>
                 <div className="box">
+                    <small className="danger-error">{invalidUserErr
+                      }</small>
                     <div className="input-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="Email">Email</label>
                         <input
                             type="text"
-                            name="username"
+                            name="Email"
                             className="login-input"
-                            placeholder="Username"
+                            placeholder="Email"
                             onChange={this
                                 .onUsernameChange
                                 .bind(this)}/>
-                        <small className="danger-error">{usernameErr
-                            ? usernameErr
+                        <small className="danger-error">{emailErr
+                            ? emailErr
                             : ""}</small>
                     </div>
                     <div className="input-group">
@@ -220,7 +241,6 @@ class LoginBox extends React.Component {
     }
 
 }
-
 
 class RegisterBox extends React.Component {
 
