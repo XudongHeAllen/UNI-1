@@ -34,19 +34,14 @@ export default class CurrentActivitiesScreen extends React.Component {
         return {
             headerTitle: "Current Activities",
             headerRight: (
-                <TouchableOpacity
-
-                    onPress={() => navigation.navigate('NewActivityScreen')}
-                >
+                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen')}>
                     <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
-                </TouchableOpacity
->
+                </TouchableOpacity>
             ),
         };
     };
 
     componentDidMount() {
-        console.log("**************1");
         this.makeRemoteRequest();
     }
 
@@ -59,7 +54,6 @@ export default class CurrentActivitiesScreen extends React.Component {
         fetch(url)
             .then(res => res.json())
             .then(res => {
-                console.log("**************");
                 this.setState({
                     data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
                     error: res.error || null,
@@ -103,7 +97,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
-                            onPress={() => this.props.navigation.navigate('SettingsScreen',
+                            onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
                             {
                                 activity_datetime: item.activity_datetime,
                                 category: item.category,

@@ -61,11 +61,11 @@ export default class NewActivityScreen extends React.Component {
 //Create button, check will write the data into database(not imple yet)
 	createAct =() =>{
 
-		if(this.name != '' && this.location != '' && this.time != ''){
-			if(this.numberOfPeople == ''){
+		if (this.name != '' && this.location != '' && this.time != ''){
+			if (this.numberOfPeople == '') {
 				this.numberOfPeople = 10;
 			}
-			if(this.description == ''){
+			if (this.description == '') {
 				this.description = "default"
 			}
 			//send  message
@@ -73,12 +73,13 @@ export default class NewActivityScreen extends React.Component {
 			//***************add event here*****************
 			this.sendRequest();
 			//need go back to acts menu
-		}else{
+		}
+		else {
 			Alert.alert("You missed something!");			
 		}
 	};
 
-	sendRequest =(enableCallback) =>{
+	sendRequest = (enableCallback) => {
 		Alert.alert("Create Activity Success!");
 		fetch('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities/activity/create',{
 			method: 'POST',
@@ -93,15 +94,15 @@ export default class NewActivityScreen extends React.Component {
 				description: "This is where you should be",
 				title: "Where it's at"
 			})
-		}).then((response) => response.json())
-    	.then((response) => {
-      	console.log(response);
+		})
+		.then((response) => response.json())
+		.then((response) => {
+      		console.log(response);
     	})
     	.catch((error) => {
-      	console.error(error);
+      		console.error(error);
     	});
-    	
-	}
+	};
 
 
 	render(){
@@ -128,7 +129,6 @@ export default class NewActivityScreen extends React.Component {
 						autoCapitalize='none' //cancel first letter capital
 						autoCorrect={false}
 						underlineColorAndroid={'transparent'} //cancel under line
-
 					/>
 				</View>
 				<View
@@ -157,8 +157,6 @@ export default class NewActivityScreen extends React.Component {
 						returnKeyType="next"
 						autoCapitalize='none' //cancel first letter capital
 						underlineColorAndroid={'transparent'} //cancel under line
-						
-						
 					/>
 				</View>
 				<View
@@ -172,8 +170,6 @@ export default class NewActivityScreen extends React.Component {
 						returnKeyType="next"
 						autoCapitalize='none' //cancel first letter capital
 						underlineColorAndroid={'transparent'} //cancel under line
-						
-						
 					/>
 				</View>
 				<View
@@ -187,8 +183,6 @@ export default class NewActivityScreen extends React.Component {
 						returnKeyType="next"
 						autoCapitalize='none' //cancel first letter capital
 						underlineColorAndroid={'transparent'} //cancel under line
-						
-						
 					/>
 				</View>
 
