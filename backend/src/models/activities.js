@@ -13,6 +13,10 @@ const activitySchema = new Schema({
         //default: Date.now,
         required: true,
     },
+    location: {
+        type: String,
+        required: true,
+    },
     category: {
         type: String,
         required: true,

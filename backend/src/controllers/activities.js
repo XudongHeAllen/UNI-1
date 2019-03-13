@@ -182,5 +182,32 @@ module.exports = {
                     }
                 })
         })(req, res, next);
-    }
+    }, 
+
+    sortByCategory: async (req, res, next) => {
+        try{
+            await Activity.find({category: req.params.category.toUpperCase()}, function(err, activities) {
+                if(err) {
+                    res.json({
+                        success: false,
+                        info: 'something went really wrong!'
+                    });
+                    next();
+                }
+                res.json({
+                    success: true,
+                    info: "Successfully retrieved all activities",
+                    activities: activities
+                });
+            }); 
+        } catch(err){
+            res.status(400).json({
+            success: false,
+            info: err.message,
+            activity: null
+            })
+        }  
+
+    },
+
 }
