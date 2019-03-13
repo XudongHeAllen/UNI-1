@@ -10,7 +10,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 module.exports = {
 
     activities: async (req, res , next) => {
-        await Activity.find({category: 'Dance'}, function(err, activities) {
+        await Activity.find({}, function(err, activities) {
             if(err) {
                 res.json({
                     success: false,
