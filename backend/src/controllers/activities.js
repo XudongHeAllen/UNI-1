@@ -186,7 +186,7 @@ module.exports = {
 
     sortByCategory: async (req, res, next) => {
         try{
-            await Activity.find({category: req.params.id}, function(err, activities) {
+            await Activity.find({category: req.params.category}, function(err, activities) {
                 if(err) {
                     res.json({
                         success: false,
