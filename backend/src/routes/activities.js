@@ -20,4 +20,9 @@ router.route('/activity/attend/:id')
 
 router.route('/activity/unattend/:id')
     .put(activityController.unattendActivity);
+
+
+router.route('/activity/sortBy/:id')
+    .get(validateBody(activitySchema.authSchema), activityController.sortByCategory);
+
   module.exports = router;
