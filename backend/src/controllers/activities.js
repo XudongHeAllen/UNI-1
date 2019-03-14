@@ -199,15 +199,13 @@ module.exports = {
                     info: "Successfully retrieved all activities",
                     activities: activities
                 });
-            }); 
+            });
         } catch(err){
             res.status(400).json({
             success: false,
             info: err.message,
             activity: null
             })
-        }  
-
+        }
     },
-
 }
