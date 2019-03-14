@@ -32,17 +32,18 @@ export default class ActivityDetailsScreen extends React.Component {
 
 
         function setCategoryIcon(category) {
-            if (category === "Sports") {
+            console.log(category)
+            if (category === "SPORTS") {
                 return sportsIcon;
-            } else if(category === "Study") {
+            } else if(category === "STUDY") {
                 return studyIcon;
-            } else if(category === "Dance") {
+            } else if(category === "DANCE") {
                 return danceIcon;
-            } else if(category === "Politics") {
+            } else if(category === "POLITICS") {
                 return politicsIcon;
-            } else if(category === "Art") {
+            } else if(category === "ART") {
                 return artIcon;
-            } else if(category === "Music") {
+            } else if(category === "MUSIC") {
                 return musicIcon;
             }
         }
