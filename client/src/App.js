@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import {createStackNavigator, createAppContainer, createBottomTabNavigator} from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import LoginScreen from "./screens/LogInScreen";
@@ -9,6 +9,8 @@ import SignUpScreen from './screens/SignUpScreen';
 import ActivityDetailsScreen  from './screens/ActivityDetailsScreen';
 import SettingsScreen from "./screens/SettingsScreen";
 import NewActivityScreen from "./screens/NewActivityScreen";
+import HomeScreen from "./screens/HomeScreen";
+import LinksScreen from "./screens/LinksScreen";
 
 
 class App extends React.Component {
@@ -24,6 +26,7 @@ class App extends React.Component {
 }
 
 const MainNavigator = createStackNavigator({
+// const MainNavigator = createBottomTabNavigator({
   LoginScreen: LoginScreen,
   CurrentActivitiesScreen: CurrentActivitiesScreen,
   SignUpScreen: SignUpScreen,

@@ -16,6 +16,8 @@ import styles from '../assets/Styles.js';
 import { Dropdown } from 'react-native-material-dropdown';
 import { List, ListItem, SearchBar } from "react-native-elements";
 
+const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
+
 export default class CurrentActivitiesScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -29,6 +31,7 @@ export default class CurrentActivitiesScreen extends React.Component {
             refreshing: false
         };
     }
+
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -48,10 +51,9 @@ export default class CurrentActivitiesScreen extends React.Component {
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
         // const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-        const url = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities';
         // this.setState({ loading: true });
 
-        fetch(url)
+        fetch(URL + '/activities')
             .then(res => res.json())
             .then(res => {
                 this.setState({
@@ -66,10 +68,18 @@ export default class CurrentActivitiesScreen extends React.Component {
             });
     };
 
+    onChangeTypeHandler(value) {
+        //TODO: update the list of all activities;
+    };
+
+    onChangeSortByHandler(value) {
+        //TODO: update the list of all activities
+    };
+
 
     render() {
         let activityTypes = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
-        let sortByCriteria = [{value: 'Time'}, {value: 'Location'}];
+        let sortByCriteria = [{value: 'Time'}];
         return (
             <View style={{flex: 1}}>
                 <View style={styles.dropdown}>
@@ -77,6 +87,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                         <Dropdown
                             label='Activity Type'
                             data={activityTypes}
+                            onChangeText={value => this.onChangeTypeHandler(value)}
                         />
                     </View>
 
@@ -84,6 +95,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                         <Dropdown
                             label='Sort'
                             data={sortByCriteria}
+                            onChangeText={value => this.onChangeSortByHandler(value)}
                             propsExtractor={({ props }, index) => props}
                         />
                     </View>
