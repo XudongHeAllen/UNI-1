@@ -102,11 +102,49 @@ module.exports = {
                      info: info.message
                  });
              }else{
-                 console.log('I managed to get here');
                  return res.status(200).json({
                      success: true,
                      secret: "resource"});
              }
          })(req, res, next);
-    }
+    },
+
+     userAttendingActivities: async (req, res, next) => {
+        passport.authenticate('jwt', {session: false}, async (err, user, info) => {
+            const data = req.body;
+            const userId = user.id;
+            const query = { attendance_list: { $all: [userId] } };
+
+            Activity.find(query, async function (db_err, activities) {
+                if(db_err) {
+                    res.json({
+                        success: false,
+                        info: "Could not find the user's activities."
+                    });
+                    next();
+                }
+                else if (err){
+                    return res.status(500).json({
+                        success:false,
+                        info: err
+                    });
+                }
+                else if (!user) {
+                    return res.status(401).json({
+                        success: false,
+                        user: user,
+                        info: info.message
+                    });
+                }
+                else {
+                    res.json({
+                        success: true,
+                        info: "Found activities that the user is interested in...",
+                        activities: activities
+                        // activity: {id: db_response.id}
+                    });
+                }
+            });
+        })(req, res, next);
+    },
 }
