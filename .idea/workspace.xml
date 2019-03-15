@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b1e18081-fe62-45fe-aec3-a22a0ff1ebc6" name="Default Changelist" comment="">
+    <list default="true" id="b1e18081-fe62-45fe-aec3-a22a0ff1ebc6" name="Default Changelist" comment="Added the &quot;view by category&quot; feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/Uni./backend/Uni./node_modules/" />
     <ignored path="$PROJECT_DIR$/Uni./client/src/node_modules/" />
@@ -68,11 +69,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="178">
               <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -129,6 +139,7 @@
         <option value="$PROJECT_DIR$/client/src/App.js" />
         <option value="$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js" />
         <option value="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" />
+        <option value="$PROJECT_DIR$/client/src/.gitignore" />
       </list>
     </option>
   </component>
@@ -193,7 +204,7 @@
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552609980880" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552610073240" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -247,7 +258,7 @@
       <workItem from="1552402004686" duration="10594000" />
       <workItem from="1552432516618" duration="366000" />
       <workItem from="1552438698114" duration="1138000" />
-      <workItem from="1552577760804" duration="12383000" />
+      <workItem from="1552577760804" duration="12534000" />
     </task>
     <task id="LOCAL-00001" summary="Updated the file structure">
       <created>1552356444965</created>
@@ -319,14 +330,29 @@
       <option name="project" value="LOCAL" />
       <updated>1552609856269</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added the &quot;view by category&quot; feature">
+      <created>1552609979134</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1552609979134</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added the &quot;view by category&quot; feature">
+      <created>1552610000668</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1552610000668</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29552000" />
+    <option name="totallyTimeSpent" value="29703000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="878" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -495,6 +521,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
         </state>
       </provider>
     </entry>
