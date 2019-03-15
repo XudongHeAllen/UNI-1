@@ -1,9 +1,3 @@
-.expo/*
-npm-debug.*
-*.jks
-*.p12
-*.key
-*.mobileprovision
 package-lock.json
 .DS_STORE
 *.log
@@ -11,4 +5,5 @@ package-lock.json
 
 node_modules
 
-.idea/
+.idea/*
+

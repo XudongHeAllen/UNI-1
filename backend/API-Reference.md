@@ -233,7 +233,9 @@ Accept: application/json
 	"activity_datetime": "2019-03-05 01:11:49.334",
 	"max_attendance":6,
 	"description": "This is where you should be",
-	"title": "Where it's at"
+	"title": "WWW3",
+	"location": "Mars"
+	
 }
 ```
 **Note that this endpoint DOES require authorization.**
@@ -345,5 +347,73 @@ HTTP 200 Content-Type: application/json
 {
     "success": false,
     "info": "Database error. \nCastError: Cast to ObjectId failed for value \"5c86bfe25c965c1b8a91c6fk\" at path \"_id\" for model \"activity\""
+}
+```
+
+## Sort activity
+
+### Request
+
+```
+GET /activities/activity/sortBy/:category
+```
+
+This endpoint will return a list of sorted activities based on the category provided by the user.
+
+**Note that this endpoint DOES require authorization.**
+
+#### Example Successful Response
+
+```json
+{
+    "success": true,
+    "info": "Successfully retrieved all activities",
+    "activities": [
+        {
+            "attendance_list": [],
+            "datetime_created": "2019-03-05T01:12:05.128Z",
+            "_id": "5c836d65303f740df6e55989",
+            "activity_datetime": "2019-04-28T06:13:00.000Z",
+            "category": "ART",
+            "description": "Lets talk Basquiat",
+            "max_attendance": 4,
+            "title": "Basquiat chat",
+            "location": "swimming pool"
+        }
+}
+```
+
+## User's attending / attended activities
+
+### Request
+
+```
+GET users/user/activities/attending
+```
+
+This endpoint will return a list of activities that the user has attended or is going to attend.
+
+
+#### Example Successful Response
+
+```json
+{
+    "success": true,
+    "info": "Found activities that the user is interested in...",
+    "activities": [
+        {
+            "attendance_list": [
+                "5c8acdaee5940c479a0d305f"
+            ],
+            "datetime_created": "2019-03-05T01:12:35.612Z",
+            "_id": "5c836d65303f740df6e5598f",
+            "activity_datetime": "2019-12-04T19:13:00.000Z",
+            "category": "SPORTS",
+            "description": "Lets play some soccer",
+            "max_attendance": 2,
+            "title": "CR7",
+            "location": "camp nou"
+        }
+    ]
 }
 ```

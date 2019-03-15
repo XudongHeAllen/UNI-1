@@ -24,6 +24,7 @@ module.exports = {
     activitySchema: {
             authSchema: Joi.object().keys(),
                 activity_datetime: Joi.date().iso().required(),
+                location: Joi.string().required(),
                 attendance_list: Joi.array().required(),
                 category: Joi.string().required(),
                 description: Joi.string().required(),
