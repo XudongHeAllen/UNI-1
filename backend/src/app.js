@@ -25,7 +25,7 @@ app.use(cors()); // Cross-origin handler
 app.use('/users', require('./routes/users'));
 app.use('/activities', require('./routes/activities'));
 
-//start the server
+//start the server 
 var port = process.env.PORT || 8000;
 
 app.listen(port, function () {

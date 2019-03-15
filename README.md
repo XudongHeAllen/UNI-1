@@ -30,6 +30,11 @@ Scan the QR code using phone. Note: Expo must be installed on the phone for test
 `node app.js` 
 
 
-## AWS instance can be accessed through the following link:
+## The current web-page can be accessed through the following link:
 
 [Uni.](http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:3000)
+
+## The base url for the api is the link below:
+
+[Uni. API](http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000)
+
