@@ -23,8 +23,10 @@ import { MonoText } from '../components/StyledText';
 export default class LogInScreen extends React.Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        token: "",
     };
+
 
     onSubmit() {
         const { email, password } = this.state;
@@ -49,7 +51,11 @@ export default class LogInScreen extends React.Component {
                         console.log("response: " +typeof response.success);
                         if (response.success === true) {
                             console.log("+++++");
-                            this.props.navigation.navigate('CurrentActivitiesScreen');
+                            this.setState({token: response.token});
+                            this.props.navigation.navigate('CurrentActivitiesScreen', {
+                                email: this.state.email,
+                                token: this.state.token,
+                            });
                         }
                         else {
                             Alert.alert("Invalid email or password!");

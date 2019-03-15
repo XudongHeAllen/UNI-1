@@ -52,7 +52,7 @@ export default class RegisterScene extends React.Component {
 	*/
 
 	//regist button, check whether regist successful based on input data
-	signUp =() =>{
+	onSubmit =() =>{
 		if(this.userName != '' && this.password != ''){
 			if(this.userName != 'Admin'){
 				if(this.password === this.confirmPassword){
@@ -153,7 +153,7 @@ export default class RegisterScene extends React.Component {
 				</View>
 				</KeyboardAvoidingView>
 				<TouchableOpacity
-					onPress={this.signUp}
+					onPress={this.onSubmit}
 					style={styles.button}>
 					<Text
 						style={styles.btText}>Sign Up</Text>

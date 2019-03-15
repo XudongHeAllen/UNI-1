@@ -21,8 +21,16 @@ import * as App from '../App';
 // const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
 export default class CurrentActivitiesScreen extends React.Component {
+    token  = "";
     constructor(props) {
         super(props);
+
+        const { navigation } = this.props;
+        const USER_DETAILS = {
+            email : navigation.getParam("email"),
+            token : navigation.getParam("token")
+        };
+        console.log("TOKEN: " + USER_DETAILS.token);
 
         this.state = {
             loading: false,
@@ -35,12 +43,11 @@ export default class CurrentActivitiesScreen extends React.Component {
         };
     }
 
-
     static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: "Current Activities",
             headerRight: (
-                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen')}>
+                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen', {token: this.token})}>
                     <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
                 </TouchableOpacity>
             ),
@@ -104,6 +111,13 @@ export default class CurrentActivitiesScreen extends React.Component {
 
 
     render() {
+        // const { navigation } = this.props;
+        // const USER_DETAILS = {
+        //     email : navigation.getParam("email"),
+        //     token : navigation.getParam("token")
+        // };
+        // console.log("TOKEN: " + USER_DETAILS.token);
+
         let activityTypes = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
         let sortByCriteria = [{value: 'Time'}];
         return (
