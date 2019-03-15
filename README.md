@@ -25,7 +25,7 @@ It will open up a localhost web browser on port 3000.
 
 Scan the QR code using phone. Note: Expo must be installed on the phone for testing the mobile clients.
 
-## Run the backend by navigating into backend/Uni. directory and type the following command:
+## Run the backend by navigating into backend/src directory and type the following command:
 
 `node app.js` 
 
