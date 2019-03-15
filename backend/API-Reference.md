@@ -233,7 +233,9 @@ Accept: application/json
 	"activity_datetime": "2019-03-05 01:11:49.334",
 	"max_attendance":6,
 	"description": "This is where you should be",
-	"title": "Where it's at"
+	"title": "WWW3",
+	"location": "Mars"
+	
 }
 ```
 **Note that this endpoint DOES require authorization.**
