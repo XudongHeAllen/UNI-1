@@ -1,7 +1,9 @@
-.expo/*
-npm-debug.*
-*.jks
-*.p12
-*.key
-*.mobileprovision
-*.idea/workspace.xml
+package-lock.json
+.DS_STORE
+*.log
+*.zip
+
+node_modules
+
+.idea/*
+

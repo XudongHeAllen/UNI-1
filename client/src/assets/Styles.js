@@ -99,9 +99,4 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: '700',
     },
-    dropdown: {
-        flexDirection: 'row',
-        marginLeft: 10,
-        marginRight: 10,
-    }
 });

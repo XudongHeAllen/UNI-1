@@ -263,3 +263,120 @@ HTTP 200 Content-Type: application/json
     "info": "No auth token"
 }
 ```
+
+## Attend an Activity
+
+### Request
+
+```
+POST /activities/activity/attend/:id
+```
+
+This endpoint will add a user specified by the authorization header to the list of attendees.
+
+#### Example Request
+
+```javascript
+PUT /activities/activity/attend/5c86bfe25c965c1b8a91c6f4
+```
+
+**Note that this endpoint DOES require authorization.**
+
+#### Example Successful Response
+
+```
+HTTP 200 Content-Type: application/json
+```
+
+```json
+{
+    "success": true,
+    "info": "Activity successfully attended.",
+    "activity": {
+        "id": "5c86bfe25c965c1b8a91c6f4"
+    }
+}
+```
+
+#### Example Unsuccessful Response:
+```json
+{
+    "success": false,
+    "info": "Database error. \nCastError: Cast to ObjectId failed for value \"5c86bfe25c965c1b8a91c6fk\" at path \"_id\" for model \"activity\""
+}
+```
+
+## unAttend an Activity
+
+### Request
+
+```
+POST /activities/activity/unattend/:id
+```
+
+This endpoint will remove a user specified by the authorization header from the list of attendees.
+
+#### Example Request
+
+```javascript
+PUT /activities/activity/unattend/5c86bfe25c965c1b8a91c6f4
+```
+
+**Note that this endpoint DOES require authorization.**
+
+#### Example Successful Response
+
+```
+HTTP 200 Content-Type: application/json
+```
+
+```json
+{
+    "success": true,
+    "info": "Activity successfully unattended.",
+    "activity": {
+        "id": "5c86bfe25c965c1b8a91c6f4"
+    }
+}
+```
+
+#### Example Unsuccessful Response:
+```json
+{
+    "success": false,
+    "info": "Database error. \nCastError: Cast to ObjectId failed for value \"5c86bfe25c965c1b8a91c6fk\" at path \"_id\" for model \"activity\""
+}
+```
+
+## Sort activity
+
+### Request
+
+```
+GET /activities/activity/sortBy/:category
+```
+
+This endpoint will return a list of sorted activities based on the category provided by the user.
+
+**Note that this endpoint DOES require authorization.**
+
+#### Example Successful Response
+
+```json
+{
+    "success": true,
+    "info": "Successfully retrieved all activities",
+    "activities": [
+        {
+            "attendance_list": [],
+            "datetime_created": "2019-03-05T01:12:05.128Z",
+            "_id": "5c836d65303f740df6e55989",
+            "activity_datetime": "2019-04-28T06:13:00.000Z",
+            "category": "ART",
+            "description": "Lets talk Basquiat",
+            "max_attendance": 4,
+            "title": "Basquiat chat",
+            "location": "swimming pool"
+        }
+}
+```
