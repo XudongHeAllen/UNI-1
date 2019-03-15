@@ -9,16 +9,63 @@ import {
     View,
     TextInput,
     KeyboardAvoidingView,
-    StatusBar
+    StatusBar,
+    Alert,
 } from 'react-native';
 import styles from '../assets/Styles.js';
+import * as App from '../App';
 
 
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-class LogInScreen extends React.Component {
+export default class LogInScreen extends React.Component {
+    state = {
+        email: "",
+        password: ""
+    };
+
+    onSubmit() {
+        const { email, password } = this.state;
+        if (email !== "" && password !== "") {
+            if (email.endsWith("@myumanitoba.ca")) {
+                console.log("link: " + App.URL + "/users/signin");
+                fetch(App.URL + "/users/signin", {
+                    method: "POST",
+                    body:  JSON.stringify({"email": email, "password": password}),
+                    headers: {
+                        'Accept':       'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(res =>
+                        res.json()
+                        // console.log("response: " +JSON.stringify(res.json()));
+
+
+                )
+                    .then(response => {
+                        console.log("response: " +typeof response.success);
+                        if (response.success === true) {
+                            console.log("+++++");
+                            this.props.navigation.navigate('CurrentActivitiesScreen');
+                        }
+                        else {
+                            Alert.alert("Invalid email or password!");
+                        }
+                        console.log("jeree");
+                    })
+            }
+            else {
+                Alert.alert("Please use your @myumanitoba.ca email!");
+            }
+        }
+        else {
+            Alert.alert("Please enter your email and password!");
+        }
+    }
+
     render() {
         return(
             <KeyboardAvoidingView behavior="padding" style={styles.logInContainer}>
@@ -37,7 +84,7 @@ class LogInScreen extends React.Component {
                     autoCapitalize="none"
                     autoCorrect={false}
                     onSubmitEditing={() => this.passwordInput.focus()}
-                    onChangeText = {this.handleEmail}
+                    onChangeText = {text => this.setState({email: text})}
                 />
                 <TextInput
                     style={styles.input}
@@ -46,11 +93,11 @@ class LogInScreen extends React.Component {
                     secureTextEntry
                     returnKeyType="go"
                     ref={(input) => this.passwordInput = input}
-                    onChangeText = {this.handlePassword}
+                    onChangeText = {text => this.setState({password: text})}
                 />
 
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('CurrentActivitiesScreen')} >LOG IN</Text>
+                    <Text style={styles.buttonText} onPress={() => this.onSubmit()} >LOG IN</Text>
                 </TouchableOpacity>
                 <Text style={styles.clickableText} onPress={() => this.props.navigation.navigate('SignUpScreen')}>Not a member yet? Sign up!</Text>
             </View>
@@ -58,6 +105,4 @@ class LogInScreen extends React.Component {
         )
     }
 }
-
-export default LogInScreen;
 

@@ -13,10 +13,17 @@ import HomeScreen from "./screens/HomeScreen";
 import LinksScreen from "./screens/LinksScreen";
 
 
+export const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
+
 class App extends React.Component {
+
   state = {
     isLoadingComplete: false,
   };
+
+  static get URL() {
+    return URL;
+  }
 
   render() {
     return (
