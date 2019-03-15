@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b1e18081-fe62-45fe-aec3-a22a0ff1ebc6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/Uni./backend/Uni./node_modules/" />
     <ignored path="$PROJECT_DIR$/Uni./client/src/node_modules/" />
@@ -73,11 +71,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="178">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -198,7 +193,7 @@
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552609676882" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552609969786" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -252,7 +247,7 @@
       <workItem from="1552402004686" duration="10594000" />
       <workItem from="1552432516618" duration="366000" />
       <workItem from="1552438698114" duration="1138000" />
-      <workItem from="1552577760804" duration="12136000" />
+      <workItem from="1552577760804" duration="12383000" />
     </task>
     <task id="LOCAL-00001" summary="Updated the file structure">
       <created>1552356444965</created>
@@ -317,15 +312,21 @@
       <option name="project" value="LOCAL" />
       <updated>1552594668045</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added the &quot;view by category&quot; feature">
+      <created>1552609856269</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1552609856269</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29305000" />
+    <option name="totallyTimeSpent" value="29552000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="878" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -367,7 +368,8 @@
     <MESSAGE value="Able to pass data to detail screen" />
     <MESSAGE value="Updated the current activities screen" />
     <MESSAGE value="Merge branch 'implement_activities_details_page' of https://github.com/cjamanambu/UNI into current_activities_screen&#10;&#10;# Conflicts:&#10;#&#9;client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'implement_activities_details_page' of https://github.com/cjamanambu/UNI into current_activities_screen&#10;&#10;# Conflicts:&#10;#&#9;client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json" />
+    <MESSAGE value="Added the &quot;view by category&quot; feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the &quot;view by category&quot; feature" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Uni./client/src/screens/CurrentActivitiesScreen.js" />
@@ -491,11 +493,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="178">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
