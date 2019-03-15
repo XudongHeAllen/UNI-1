@@ -106,6 +106,9 @@ export default class NewActivityScreen extends React.Component {
 
 
 	render(){
+		const { navigation } = this.props;
+
+		console.log("+++++++" + navigation.getParam("token"));
 		return (
 			<TouchableOpacity	//using touchable opacity as background
 				activeOpacity={1.0}	//when clicked change active 

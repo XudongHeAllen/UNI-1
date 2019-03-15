@@ -21,17 +21,8 @@ import * as App from '../App';
 // const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
 export default class CurrentActivitiesScreen extends React.Component {
-    token  = "";
     constructor(props) {
         super(props);
-
-        const { navigation } = this.props;
-        const USER_DETAILS = {
-            email : navigation.getParam("email"),
-            token : navigation.getParam("token")
-        };
-        console.log("TOKEN: " + USER_DETAILS.token);
-
         this.state = {
             loading: false,
             data: [],
@@ -40,14 +31,28 @@ export default class CurrentActivitiesScreen extends React.Component {
             error: null,
             refreshing: false,
             selectedCategory: "",
+            token: "",
         };
+        const { navigation } = this.props;
+        const USER_DETAILS = {
+            email : navigation.getParam("email"),
+            token : navigation.getParam("token")
+        };
+        this.state.token = USER_DETAILS.token;
+        console.log("TOKEN: " + USER_DETAILS.token);
+    }
+
+    componentWillMount() {
+        const {setParams} = this.props.navigation;
+        setParams({token :this.state.token});
     }
 
     static navigationOptions = ({ navigation }) => {
+        const {state} = navigation;
         return {
             headerTitle: "Current Activities",
             headerRight: (
-                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen', {token: this.token})}>
+                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen', {token: state.params.token})}>
                     <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
                 </TouchableOpacity>
             ),
@@ -66,8 +71,6 @@ export default class CurrentActivitiesScreen extends React.Component {
 
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
-        // const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
-        // this.setState({ loading: true });
 
         fetch(App.URL + '/activities')
             .then(res => res.json())
@@ -87,9 +90,13 @@ export default class CurrentActivitiesScreen extends React.Component {
     };
 
     onChangeTypeHandler(value) {
+        let link = "";
+        if (value === 'All')
+            link = App.URL + '/activities';
+        else
+            link = App.URL + '/activities/activity/sortBy/' + value;
         const { page, seed } = this.state;
-        //TODO: update the list of all activities;
-        fetch(App.URL + '/activities/activity/sortBy/' + value)
+        fetch(link)
             .then(res => res.json())
             .then(res => {
                 this.setState({
@@ -111,14 +118,7 @@ export default class CurrentActivitiesScreen extends React.Component {
 
 
     render() {
-        // const { navigation } = this.props;
-        // const USER_DETAILS = {
-        //     email : navigation.getParam("email"),
-        //     token : navigation.getParam("token")
-        // };
-        // console.log("TOKEN: " + USER_DETAILS.token);
-
-        let activityTypes = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
+        let activityTypes = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}, {value: 'All'}];
         let sortByCriteria = [{value: 'Time'}];
         return (
             <View style={{flex: 1}}>
@@ -127,7 +127,6 @@ export default class CurrentActivitiesScreen extends React.Component {
                         <Dropdown
                             label='Activity Type'
                             data={activityTypes}
-                            // onChangeText={value => {this.componentDidUpdate(this.props)}}
                             onChangeText={value => this.setState({selectedCategory: value})}
                         />
                     </View>
@@ -159,11 +158,11 @@ export default class CurrentActivitiesScreen extends React.Component {
                                     title: item.title,
                                     attendance_list: item.attendance_list,
                                     datetime_created: item.datetime_created,
-                                })}
+                                })
+                            }
                         />
                     )}
                 />
-
             </View>
         )
     }

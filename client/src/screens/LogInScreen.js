@@ -41,16 +41,10 @@ export default class LogInScreen extends React.Component {
                         'Content-Type': 'application/json',
                     }
                 })
-                    .then(res =>
-                        res.json()
-                        // console.log("response: " +JSON.stringify(res.json()));
-
-
-                )
+                    .then(res => res.json())
                     .then(response => {
                         console.log("response: " +typeof response.success);
                         if (response.success === true) {
-                            console.log("+++++");
                             this.setState({token: response.token});
                             this.props.navigation.navigate('CurrentActivitiesScreen', {
                                 email: this.state.email,
@@ -60,8 +54,8 @@ export default class LogInScreen extends React.Component {
                         else {
                             Alert.alert("Invalid email or password!");
                         }
-                        console.log("jeree");
-                    })
+                    }
+                )
             }
             else {
                 Alert.alert("Please use your @myumanitoba.ca email!");
