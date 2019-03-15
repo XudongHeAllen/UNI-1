@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1e18081-fe62-45fe-aec3-a22a0ff1ebc6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/Uni./backend/Uni./node_modules/" />
@@ -20,14 +16,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="93" column="63" lean-forward="true" selection-start-line="93" selection-start-column="63" selection-end-line="93" selection-end-column="63" />
+            <state relative-caret-position="1104">
+              <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="55" column="65" lean-forward="true" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -59,19 +64,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="28" column="51" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="69" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
+            <state relative-caret-position="644">
               <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -111,6 +113,7 @@
       <find>createBottomTabNavigator</find>
       <find>Li</find>
       <find>tab</find>
+      <find>setCategoryIcon</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,6 +132,7 @@
         <option value="$PROJECT_DIR$/client/src/screens/NewActivityScreen.js" />
         <option value="$PROJECT_DIR$/client/src/screens/LogInScreen.js" />
         <option value="$PROJECT_DIR$/client/src/App.js" />
+        <option value="$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js" />
         <option value="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" />
       </list>
     </option>
@@ -194,7 +198,7 @@
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552594633735" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552609676882" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -248,7 +252,7 @@
       <workItem from="1552402004686" duration="10594000" />
       <workItem from="1552432516618" duration="366000" />
       <workItem from="1552438698114" duration="1138000" />
-      <workItem from="1552577760804" duration="2684000" />
+      <workItem from="1552577760804" duration="12136000" />
     </task>
     <task id="LOCAL-00001" summary="Updated the file structure">
       <created>1552356444965</created>
@@ -299,34 +303,50 @@
       <option name="project" value="LOCAL" />
       <updated>1552439205802</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Merge branch 'implement_activities_details_page' of https://github.com/cjamanambu/UNI into current_activities_screen&#10;&#10;# Conflicts:&#10;#&#9;client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json">
+      <created>1552594585091</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1552594585092</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Merge branch 'implement_activities_details_page' of https://github.com/cjamanambu/UNI into current_activities_screen&#10;&#10;# Conflicts:&#10;#&#9;client/src/node_modules/.cache/@babel/register/.babel.7.2.2.development.json">
+      <created>1552594668045</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1552594668045</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19853000" />
+    <option name="totallyTimeSpent" value="29305000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="878" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25679544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32951653" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32951653" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985694" visible="true" weight="0.32951653" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994911" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32951653" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49928468" weight="0.32951653" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32951653" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50143063" side_tool="true" visible="true" weight="0.32951653" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -425,20 +445,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
+    <entry file="file://$PROJECT_DIR$/client/src/screens/HomeScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="28" column="51" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
+        <state relative-caret-position="195">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -455,20 +465,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/HomeScreen.js">
+    <entry file="file://$PROJECT_DIR$/client/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="55" column="65" lean-forward="true" selection-start-line="55" selection-start-column="65" selection-end-line="55" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1104">
+          <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js">
+    <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="93" column="63" lean-forward="true" selection-start-line="93" selection-start-column="63" selection-end-line="93" selection-end-column="63" />
+        <state relative-caret-position="644">
+          <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

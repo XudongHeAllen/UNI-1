@@ -15,6 +15,7 @@ import {
 import styles from '../assets/Styles.js';
 import { Dropdown } from 'react-native-material-dropdown';
 import { List, ListItem, SearchBar } from "react-native-elements";
+import ActivityDetailsScreen  from './ActivityDetailsScreen';
 
 const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
@@ -28,7 +29,8 @@ export default class CurrentActivitiesScreen extends React.Component {
             page: 1,
             seed: 1,
             error: null,
-            refreshing: false
+            refreshing: false,
+            selectedCategory: "",
         };
     }
 
@@ -48,6 +50,12 @@ export default class CurrentActivitiesScreen extends React.Component {
         this.makeRemoteRequest();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.selectedCategory !== prevState.selectedCategory && this.state.selectedCategory !== "") {
+            this.onChangeTypeHandler(this.state.selectedCategory);
+        }
+    }
+
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
         // const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
@@ -60,7 +68,8 @@ export default class CurrentActivitiesScreen extends React.Component {
                     data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
                     error: res.error || null,
                     loading: false,
-                    refreshing: false
+                    refreshing: false,
+
                 });
             })
             .catch(error => {
@@ -69,7 +78,22 @@ export default class CurrentActivitiesScreen extends React.Component {
     };
 
     onChangeTypeHandler(value) {
+        const { page, seed } = this.state;
         //TODO: update the list of all activities;
+        fetch(URL + '/activities/activity/sortBy/' + value)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
+                    error: res.error || null,
+                    loading: false,
+                    refreshing: false,
+                    selectedCategory: this.state.selectedCategory,
+                });
+            })
+            .catch(error => {
+                this.setState({ error, loading: false });
+            });
     };
 
     onChangeSortByHandler(value) {
@@ -87,7 +111,8 @@ export default class CurrentActivitiesScreen extends React.Component {
                         <Dropdown
                             label='Activity Type'
                             data={activityTypes}
-                            onChangeText={value => this.onChangeTypeHandler(value)}
+                            // onChangeText={value => {this.componentDidUpdate(this.props)}}
+                            onChangeText={value => this.setState({selectedCategory: value})}
                         />
                     </View>
 
@@ -108,7 +133,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                         <ListItem
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
-                            leftAvatar={{ source: require('../assets/images/Octocat.png') }}
+                            leftAvatar={{ source:{icon} }}
                             onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
                             {
                                 activity_datetime: item.activity_datetime,
