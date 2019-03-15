@@ -382,3 +382,38 @@ This endpoint will return a list of sorted activities based on the category prov
         }
 }
 ```
+
+## User's attending / attended activities
+
+### Request
+
+```
+GET users/user/activities/attending
+```
+
+This endpoint will return a list of activities that the user has attended or is going to attend.
+
+
+#### Example Successful Response
+
+```json
+{
+    "success": true,
+    "info": "Found activities that the user is interested in...",
+    "activities": [
+        {
+            "attendance_list": [
+                "5c8acdaee5940c479a0d305f"
+            ],
+            "datetime_created": "2019-03-05T01:12:35.612Z",
+            "_id": "5c836d65303f740df6e5598f",
+            "activity_datetime": "2019-12-04T19:13:00.000Z",
+            "category": "SPORTS",
+            "description": "Lets play some soccer",
+            "max_attendance": 2,
+            "title": "CR7",
+            "location": "camp nou"
+        }
+    ]
+}
+```
