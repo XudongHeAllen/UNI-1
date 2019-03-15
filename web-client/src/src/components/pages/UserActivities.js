@@ -1,12 +1,18 @@
 import React from 'react';
 
-//when use class-based components, it is this.props
-//props.children renders B/W opening and closing components
 const UserActivities = (props) => {
     return (
-        <div className="ui placeholder segment" onClick={props.click}>
-            <p>this is author. {props.name}</p>
-            <p>this is an activity. {props.cate}</p>
+        <div className='item'>
+            <div className="content">
+                <a className="header" onClick={props.click}>{props.title}</a>
+                <div className="description">
+                    category: {props.category}
+                </div>
+                <div className="extra">
+                    time: {props.time}
+                </div>
+            </div>
+
         </div>
     )
 };
