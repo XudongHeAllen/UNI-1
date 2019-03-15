@@ -19,4 +19,7 @@ router.route('/signin')
 router.route('/secret')
     .get(UsersController.secret);
 
+router.route('/user/activities/attending')
+	.get(validateBody(activitySchema.authSchema), UsersController.userAttendingActivities);
+
 module.exports = router;
