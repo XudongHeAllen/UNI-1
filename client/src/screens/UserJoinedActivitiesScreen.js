@@ -15,12 +15,11 @@ import {
 import styles from '../assets/Styles.js';
 import { Dropdown } from 'react-native-material-dropdown';
 import { List, ListItem, SearchBar } from "react-native-elements";
-import ActivityDetailsScreen  from './ActivityDetailsScreen';
 import * as App from '../App';
 
 // const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
-export default class CurrentActivitiesScreen extends React.Component {
+export default class UserJoinedActivities extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,7 +49,7 @@ export default class CurrentActivitiesScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const {state} = navigation;
         return {
-            headerTitle: "Current Activities",
+            headerTitle: "Joined Activityies",
             headerRight: (
                 <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen', {token: state.params.token})}>
                     <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
@@ -72,16 +71,10 @@ export default class CurrentActivitiesScreen extends React.Component {
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
 
-        fetch(App.URL + '/activities')
+        fetch(App.URL + '/users/user/activities/attending')
             .then(res => res.json())
             .then(res => {
-                this.setState({
-                    data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
-                    error: res.error || null,
-                    loading: false,
-                    refreshing: false,
-
-                });
+                console.log(res);
             })
             .catch(error => {
                 this.setState({ error, loading: false });
@@ -151,7 +144,6 @@ export default class CurrentActivitiesScreen extends React.Component {
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
                             onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
                                 {
-                                    activity_id : item._id,
                                     activity_datetime: item.activity_datetime,
                                     category: item.category,
                                     description: item.description,

@@ -18,6 +18,7 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import styles from '../assets/Styles.js';
+import * as App from '../App';
 
 export default class ActivityDetailsScreen extends React.Component {
     render() {
@@ -48,6 +49,24 @@ export default class ActivityDetailsScreen extends React.Component {
             }
         }
 
+        function joinActivity() {
+
+            console.log("Hello");
+            const activityID = navigation.getParam("activity_id");
+            console.log(activityID);
+            console.log(App.URL + '/activities/activity/attend/' + activityID)
+            fetch(App.URL + '/activities/activity/attend/' + activityID)
+            .then(res => res.json())
+            .then(res => {
+                console.log("RESPONSE: " + res);
+                // this.props.navigation.navigate('UserJoinedActivitiesScreen')
+            })
+            .catch(error => {
+                console.log(error)
+            }
+        );
+        }
+
 
         return (
             <View style={styles.currActContainer}>
@@ -59,7 +78,7 @@ export default class ActivityDetailsScreen extends React.Component {
                 <Text>Time of Event: {dateFormat(navigation.getParam("activity_datetime"), "dddd, mmmm dS, h:MM TT")}</Text>
                 <Text>{navigation.getParam("description")}</Text>
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={() => this.props.navigation.navigate('CurrentActivitiesScreen')}>Join Activity</Text>
+                    <Text style={styles.buttonText} onPress={() => joinActivity()}>Join Activity</Text>
                 </TouchableOpacity>
             </View>
         )
