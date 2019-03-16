@@ -271,7 +271,7 @@ HTTP 200 Content-Type: application/json
 ### Request
 
 ```
-POST /activities/activity/attend/:id
+PUT /activities/activity/attend/:id
 ```
 
 This endpoint will add a user specified by the authorization header to the list of attendees.
@@ -313,7 +313,7 @@ HTTP 200 Content-Type: application/json
 ### Request
 
 ```
-POST /activities/activity/unattend/:id
+PUT /activities/activity/unattend/:id
 ```
 
 This endpoint will remove a user specified by the authorization header from the list of attendees.
