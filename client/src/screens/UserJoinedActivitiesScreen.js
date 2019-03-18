@@ -49,12 +49,7 @@ export default class UserJoinedActivities extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const {state} = navigation;
         return {
-            headerTitle: "Joined Activityies",
-            headerRight: (
-                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen', {token: state.params.token})}>
-                    <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
-                </TouchableOpacity>
-            ),
+            headerTitle: "Joined Activities"
         };
     };
 
@@ -70,11 +65,23 @@ export default class UserJoinedActivities extends React.Component {
 
     makeRemoteRequest = () => {
         const { page, seed } = this.state;
-
-        fetch(App.URL + '/users/user/activities/attending')
-            .then(res => res.json())
+        fetch(App.URL + '/users/user/activities/attending', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1Yzg4NDA1NTE5NTE5NTEzZDk4Yzk1YWYiLCJpYXQiOjE1NTI5NDI0MDAwNTcsImV4cCI6MTU1MzAyODgwMDA1N30.rIlKgqeqpkGXarswE6cL3R9gnF9bWwssfzZPcE086qk"
+            }
+        })
+        .then(res => res.json())
             .then(res => {
-                console.log(res);
+                this.setState({
+                    data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
+                    error: res.error || null,
+                    loading: false,
+                    refreshing: false,
+
+                });
             })
             .catch(error => {
                 this.setState({ error, loading: false });
@@ -83,23 +90,25 @@ export default class UserJoinedActivities extends React.Component {
     };
 
     onChangeTypeHandler(value) {
-        let link = "";
-        if (value === 'All')
-            link = App.URL + '/activities';
-        else
-            link = App.URL + '/activities/activity/sortBy/' + value;
-        const { page, seed } = this.state;
-        fetch(link)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
-                    error: res.error || null,
-                    loading: false,
-                    refreshing: false,
-                    selectedCategory: this.state.selectedCategory,
-                });
-            })
+
+        fetch(App.URL + '/users/user/activities/attending', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1Yzg4NDA1NTE5NTE5NTEzZDk4Yzk1YWYiLCJpYXQiOjE1NTI5NDI0MDAwNTcsImV4cCI6MTU1MzAyODgwMDA1N30.rIlKgqeqpkGXarswE6cL3R9gnF9bWwssfzZPcE086qk"
+            },
+        })
+        .then(res => res.json())
+        .then(res => {
+            this.setState({
+                data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
+                error: res.error || null,
+                loading: false,
+                refreshing: false,
+                selectedCategory: this.state.selectedCategory,
+            });
+        })
             .catch(error => {
                 this.setState({ error, loading: false });
             });
@@ -115,24 +124,6 @@ export default class UserJoinedActivities extends React.Component {
         let sortByCriteria = [{value: 'Time'}];
         return (
             <View style={{flex: 1}}>
-                <View style={styles.dropdown}>
-                    <View style={{ flex: 1 }}>
-                        <Dropdown
-                            label='Activity Type'
-                            data={activityTypes}
-                            onChangeText={value => this.setState({selectedCategory: value})}
-                        />
-                    </View>
-
-                    <View style={{ width: 96, marginLeft: 8 }}>
-                        <Dropdown
-                            label='Sort'
-                            data={sortByCriteria}
-                            onChangeText={value => this.onChangeSortByHandler(value)}
-                            propsExtractor={({ props }, index) => props}
-                        />
-                    </View>
-                </View>
 
                 <FlatList
                     data={this.state.data}

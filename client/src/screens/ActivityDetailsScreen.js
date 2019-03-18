@@ -49,22 +49,19 @@ export default class ActivityDetailsScreen extends React.Component {
             }
         }
 
-        function joinActivity() {
+        function joinActivity(navigation) {
 
-            console.log("Hello");
             const activityID = navigation.getParam("activity_id");
-            console.log(activityID);
-            console.log(App.URL + '/activities/activity/attend/' + activityID)
-            fetch(App.URL + '/activities/activity/attend/' + activityID)
-            .then(res => res.json())
-            .then(res => {
-                console.log("RESPONSE: " + res);
-                // this.props.navigation.navigate('UserJoinedActivitiesScreen')
+            fetch(App.URL + '/activities/activity/attend/' + activityID, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1Yzg4NDA1NTE5NTE5NTEzZDk4Yzk1YWYiLCJpYXQiOjE1NTI5NDI0MDAwNTcsImV4cCI6MTU1MzAyODgwMDA1N30.rIlKgqeqpkGXarswE6cL3R9gnF9bWwssfzZPcE086qk"
+                }
+            }).then(_ => {
+                navigation.navigate('UserJoinedActivitiesScreen')
             })
-            .catch(error => {
-                console.log(error)
-            }
-        );
         }
 
 
@@ -78,7 +75,7 @@ export default class ActivityDetailsScreen extends React.Component {
                 <Text>Time of Event: {dateFormat(navigation.getParam("activity_datetime"), "dddd, mmmm dS, h:MM TT")}</Text>
                 <Text>{navigation.getParam("description")}</Text>
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={() => joinActivity()}>Join Activity</Text>
+                    <Text style={styles.buttonText} onPress={() => joinActivity(this.props.navigation)}>Join Activity</Text>
                 </TouchableOpacity>
             </View>
         )

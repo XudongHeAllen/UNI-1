@@ -38,7 +38,8 @@ export default class LogInScreen extends React.Component {
                     body:  JSON.stringify({"email": email, "password": password}),
                     headers: {
                         'Accept':       'application/json',
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
+                        
                     }
                 })
                     .then(res => res.json())
