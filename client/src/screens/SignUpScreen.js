@@ -8,7 +8,7 @@ import{
 	View,
 	Text,
 	Alert,
-	Button
+	Button,
 }from 'react-native';
 import styles from '../assets/Styles.js';
 import * as App from "../App";
