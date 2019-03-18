@@ -4,17 +4,20 @@ import UserActivity from './UserActivities';
 import Sidebar from "./Sidebar";
 import "../../userpage.css";
 import axios from "../../axios_def";
+import CreateActivity from './CreateActivity'
 
 //section 3, lecture 47
 
 //keep as many stateless components as possible. this is stateful.
 class UserPage extends React.Component {
     state = {
-        activities: []
+        activities: [],
+        displayCreateModal:false
     };
 
     createActivityHandler = () => {
-        alert('pop up create activity component!');
+        this.refs.createModal.open();
+
     };
 
     showActivityHandler = () =>{
@@ -28,19 +31,23 @@ class UserPage extends React.Component {
         });
     }
 
+
     render()
     {
         return (
             <div id="App">
+                <CreateActivity ref ="createModal" token = {this.props.location.state.token} display={this.state.displayCreateModal} />
                 <Sidebar 
                     pageWrapId={"page-wrap"} 
                     outerContainerId={"App"}
+                    width={ "25%" }
                     name={this.props.location.state.stateName} 
                 />
 
                 <div id="page-wrap">
-                    <Segment>
+                      <Segment>
                         <h2>welcome, {this.props.location.state.stateName}!</h2>
+
                         <button
                             className='medium ui primary button'
                             onClick={this.createActivityHandler}>
@@ -51,6 +58,7 @@ class UserPage extends React.Component {
                             {
                                 this.state.activities.map(
                                     activity => <UserActivity
+                                                    key={activity._id}
                                                     category={activity.category}
                                                     title={activity.title}
                                                     time={activity.activity_datetime}
