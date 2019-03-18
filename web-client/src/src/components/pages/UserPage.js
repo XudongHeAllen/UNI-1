@@ -52,6 +52,7 @@ class UserPage extends React.Component {
                             {
                                 this.state.activities.map(
                                     activity => <UserActivity
+                                                    key={activity._id}
                                                     category={activity.category}
                                                     title={activity.title}
                                                     time={activity.activity_datetime}
