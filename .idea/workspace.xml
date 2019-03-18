@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b1e18081-fe62-45fe-aec3-a22a0ff1ebc6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/screens/NewActivityScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/NewActivityScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/screens/SignUpScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/SignUpScreen.js" afterDir="false" />
@@ -22,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-230">
-              <caret line="64" column="6" selection-start-line="64" selection-start-column="6" selection-end-line="64" selection-end-column="6" />
+            <state relative-caret-position="267">
+              <caret line="133" column="71" selection-start-line="133" selection-start-column="71" selection-end-line="133" selection-end-column="71" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -34,17 +32,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+            <state relative-caret-position="313">
+              <caret line="58" column="116" lean-forward="true" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="116" />
+              <folding>
+                <element signature="e#394#420#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/screens/NewActivityScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+            <state relative-caret-position="-1949">
+              <caret line="118" column="53" lean-forward="true" selection-start-line="118" selection-start-column="53" selection-end-line="118" selection-end-column="53" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -55,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1379">
-              <caret line="102" column="19" selection-start-line="102" selection-start-column="19" selection-end-line="102" selection-end-column="19" />
+            <state relative-caret-position="-885">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="26" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -64,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/screens/SignUpScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+            <state relative-caret-position="-19">
+              <caret line="63" column="14" lean-forward="true" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -123,6 +124,7 @@
       <find>userName</find>
       <find>naviga</find>
       <find>confirm</find>
+      <find>login</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,10 +146,10 @@
         <option value="$PROJECT_DIR$/client/src/screens/LinksScreen.js" />
         <option value="$PROJECT_DIR$/client/src/assets/Styles.js" />
         <option value="$PROJECT_DIR$/client/src/App.js" />
-        <option value="$PROJECT_DIR$/client/src/screens/SignUpScreen.js" />
         <option value="$PROJECT_DIR$/client/src/screens/LogInScreen.js" />
-        <option value="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" />
         <option value="$PROJECT_DIR$/client/src/screens/NewActivityScreen.js" />
+        <option value="$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js" />
+        <option value="$PROJECT_DIR$/client/src/screens/SignUpScreen.js" />
       </list>
     </option>
   </component>
@@ -161,6 +163,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -168,11 +171,6 @@
             <path>
               <item name="UNI" type="b2602c69:ProjectViewProjectNode" />
               <item name="UNI" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="UNI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="UNI" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="UNI" type="b2602c69:ProjectViewProjectNode" />
@@ -221,14 +219,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552932958175" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552951447556" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -289,7 +286,8 @@
       <workItem from="1552615687068" duration="704000" />
       <workItem from="1552668296822" duration="16692000" />
       <workItem from="1552750570387" duration="565000" />
-      <workItem from="1552928949686" duration="2833000" />
+      <workItem from="1552928949686" duration="3204000" />
+      <workItem from="1552944853577" duration="4186000" />
     </task>
     <task id="LOCAL-00001" summary="Updated the file structure">
       <created>1552356444965</created>
@@ -403,17 +401,24 @@
       <option name="project" value="LOCAL" />
       <updated>1552692120900</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added reload feature for the list screen after new activity added">
+      <created>1552933084974</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1552933084974</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52139000" />
+    <option name="totallyTimeSpent" value="56696000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="878" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28183118" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28540772" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -422,7 +427,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49928468" weight="0.32951653" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4914163" visible="true" weight="0.27480915" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.490701" visible="true" weight="0.27480915" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3994911" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -431,7 +436,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49284694" weight="0.32951653" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49213162" weight="0.32951653" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50858366" side_tool="true" visible="true" weight="0.27480915" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.509299" side_tool="true" visible="true" weight="0.27480915" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -498,7 +503,8 @@
     <MESSAGE value="Added login feature" />
     <MESSAGE value="Added token passing to consequent screens" />
     <MESSAGE value="Added signup feature and cleaned the code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added signup feature and cleaned the code" />
+    <MESSAGE value="Added reload feature for the list screen after new activity added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added reload feature for the list screen after new activity added" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Uni./client/src/screens/CurrentActivitiesScreen.js" />
@@ -595,23 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/SignUpScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/screens/HomeScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2625">
@@ -632,30 +621,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
+    <entry file="file://$PROJECT_DIR$/client/src/screens/NewActivityScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1379">
-          <caret line="102" column="19" selection-start-line="102" selection-start-column="19" selection-end-line="102" selection-end-column="19" />
+        <state relative-caret-position="-1949">
+          <caret line="118" column="53" lean-forward="true" selection-start-line="118" selection-start-column="53" selection-end-line="118" selection-end-column="53" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/screens/ActivityDetailsScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="58" column="116" lean-forward="true" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="116" />
+          <folding>
+            <element signature="e#394#420#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/screens/CurrentActivitiesScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-230">
-          <caret line="64" column="6" selection-start-line="64" selection-start-column="6" selection-end-line="64" selection-end-column="6" />
+        <state relative-caret-position="267">
+          <caret line="133" column="71" selection-start-line="133" selection-start-column="71" selection-end-line="133" selection-end-column="71" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/screens/NewActivityScreen.js">
+    <entry file="file://$PROJECT_DIR$/client/src/screens/LogInScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+        <state relative-caret-position="-885">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/screens/SignUpScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="63" column="14" lean-forward="true" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="14" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

@@ -18,6 +18,8 @@ import { List, ListItem, SearchBar } from "react-native-elements";
 import ActivityDetailsScreen  from './ActivityDetailsScreen';
 import * as App from '../App';
 
+const dateFormat = require('dateformat');
+
 // const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
 export default class CurrentActivitiesScreen extends React.Component {
@@ -128,8 +130,8 @@ export default class CurrentActivitiesScreen extends React.Component {
                     extraData={this.state.data}
                     renderItem={({item}) => (
                         <ListItem
-                            title={`${item.title} ${item.title}`}
-                            subtitle={item.description}
+                            title={item.title}
+                            subtitle={dateFormat(item.activity_datetime, "dddd, mmmm dS, h:MM TT") + ' - ' + item.location}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
                             onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
                                 {

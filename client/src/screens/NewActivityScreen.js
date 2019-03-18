@@ -84,7 +84,7 @@ export default class NewActivityScreen extends React.Component {
 		this.category = newCategory;
 		console.log(this.category);
 	}
-	
+
 	createAct =() =>{
 
 		if (this.name != '' && this.location != '' && this.time != ''){
