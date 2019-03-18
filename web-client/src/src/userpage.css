@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 html,
 body {
   margin: 0;
@@ -22,16 +23,61 @@ body {
   display: inline-block;
 
   /* Our sidebar item styling */
+  position: relative;
+  margin: 0 15%;
+  text-align: right;
   text-decoration: none;
+  text-transform: uppercase;
+  top: 30%;
+  transform: translateY(-50%);
   margin-bottom: 10px;
   color: #d1d1d1;
   transition: color 0.2s;
+  font-family: 'Open Sans', sans-serif;
+      line-height: 5em;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.4em;
+      color: rgba(#FFF, 0.35);
+      display: block;
+      transition: all ease-out 300ms;
 }
 
 /* Change color on hover */
+
 .bm-item:hover {
+  color: antiquewhite;
+  font-weight: bold;
+  font-size: 1.17em;
+}
+.bm-item:focus {
+  outline: none;
+}
+
+.bm-item.active a {
   color: white;
 }
+
+.bm-item:not(.active)::after {
+  opacity: 0.2;
+}
+
+.bm-item:not(.active):hover a {
+  color: rgba(#FFF, 0.75);
+}
+
+.bm-item::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0.2em;
+  background: black;
+  left: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, #5e42a6, #b74e91)
+}
+
+
 
 /* The rest copied directly from react-burger-menu docs */
 
@@ -46,7 +92,7 @@ body {
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #0a192f;
 }
 
 /* Position and sizing of clickable cross button */
@@ -61,15 +107,20 @@ body {
 }
 
 /* General sidebar styles */
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
 .bm-menu {
-  background: #373a47;
+  background: #0a192f;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #373a47;
+  fill: #0a192f;
 }
 
 /* Wrapper for item list */

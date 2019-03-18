@@ -35,6 +35,7 @@ class UserPage extends React.Component {
                 <Sidebar 
                     pageWrapId={"page-wrap"} 
                     outerContainerId={"App"}
+                    width={ "25%" }
                     name={this.props.location.state.stateName} 
                 />
 
