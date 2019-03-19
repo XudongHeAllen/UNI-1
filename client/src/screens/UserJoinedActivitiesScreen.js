@@ -37,8 +37,6 @@ export default class UserJoinedActivities extends React.Component {
             email : navigation.getParam("email"),
             token : navigation.getParam("token")
         };
-        this.state.token = USER_DETAILS.token;
-        console.log("TOKEN: " + USER_DETAILS.token);
     }
 
     componentWillMount() {
@@ -89,34 +87,11 @@ export default class UserJoinedActivities extends React.Component {
         );
     };
 
-    onChangeTypeHandler(value) {
+    onBack () {
+        this.makeRemoteRequest();
+    }
 
-        fetch(App.URL + '/users/user/activities/attending', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1Yzg4NDA1NTE5NTE5NTEzZDk4Yzk1YWYiLCJpYXQiOjE1NTI5NDI0MDAwNTcsImV4cCI6MTU1MzAyODgwMDA1N30.rIlKgqeqpkGXarswE6cL3R9gnF9bWwssfzZPcE086qk"
-            },
-        })
-        .then(res => res.json())
-        .then(res => {
-            this.setState({
-                data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
-                error: res.error || null,
-                loading: false,
-                refreshing: false,
-                selectedCategory: this.state.selectedCategory,
-            });
-        })
-            .catch(error => {
-                this.setState({ error, loading: false });
-            });
-    };
 
-    onChangeSortByHandler(value) {
-        //TODO: update the list of all activities
-    };
 
 
     render() {
@@ -133,8 +108,9 @@ export default class UserJoinedActivities extends React.Component {
                             title={`${item.title} ${item.title}`}
                             subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
-                            onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
+                            onPress={() => this.props.navigation.navigate('JoinedActivityDetailsPage',
                                 {
+                                    activity_id : item._id,
                                     activity_datetime: item.activity_datetime,
                                     category: item.category,
                                     description: item.description,
@@ -142,6 +118,7 @@ export default class UserJoinedActivities extends React.Component {
                                     title: item.title,
                                     attendance_list: item.attendance_list,
                                     datetime_created: item.datetime_created,
+                                    onBack: this.onBack.bind(this)
                                 })
                             }
                         />
