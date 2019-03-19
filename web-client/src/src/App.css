@@ -67,3 +67,21 @@
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
+
+#link-button {
+    font-weight: bolder;
+    font-size: 17px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: blue;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+#link-button:hover,
+#link-button:focus {
+    text-decoration: none;
+}
