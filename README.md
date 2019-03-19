@@ -5,7 +5,7 @@ University Network Interface
 The elevator pitch as presented to John Braico:
 UNI is an application that will allow University of Manitoba students create sport or study events on campus and will allow other students that have an interest in that event to join in. This will fulfill the desire for students to meet other students with similar interests.
 
-## Run the web client by navigating into web-client/src and then running the following command(s):
+## To run the web client, navigate into web-client/src and run the following command(s):
 
 `npm install`
 
@@ -15,7 +15,7 @@ And then
 
 It will open up a localhost web browser on port 3000.
 
-## Run the mobile client by navigating into client/src and running the following command(s):
+## To run the mobile client, navigate into client/src and run the following command(s):
 
 `npm install`
 
@@ -26,7 +26,7 @@ And then
 
 Scan the QR code using phone. Note: Expo must be installed on the phone for testing the mobile clients.
 
-## Run the backend (API server) by navigating into backend/src and running the following command(s):
+## To run the backend (API server), navigate into backend/src and run the following command(s):
 `npm install`
 
 And then
