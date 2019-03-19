@@ -67,7 +67,17 @@ class UserActivities extends React.Component{
 
                             <br/>
 
-                            <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                            <button
+                                className='small ui primary button'
+                                onClick="">
+                                Join
+                            </button>
+                            <button
+                                className='small ui primary button'
+                                onClick={() => this.closeModal()}>
+                                close
+                            </button>
+
                         </div>
 
 
