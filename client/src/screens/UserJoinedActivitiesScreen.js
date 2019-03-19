@@ -15,14 +15,11 @@ import {
 import styles from '../assets/Styles.js';
 import { Dropdown } from 'react-native-material-dropdown';
 import { List, ListItem, SearchBar } from "react-native-elements";
-import ActivityDetailsScreen  from './ActivityDetailsScreen';
 import * as App from '../App';
-
-const dateFormat = require('dateformat');
 
 // const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
-export default class CurrentActivitiesScreen extends React.Component {
+export default class UserJoinedActivities extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +29,7 @@ export default class CurrentActivitiesScreen extends React.Component {
             seed: 1,
             error: null,
             refreshing: false,
-            selectedCategory: "All",
+            selectedCategory: "",
             token: "",
         };
         const { navigation } = this.props;
@@ -40,16 +37,9 @@ export default class CurrentActivitiesScreen extends React.Component {
             email : navigation.getParam("email"),
             token : navigation.getParam("token")
         };
-        this.state.token = USER_DETAILS.token;
-        console.log("TOKEN: " + USER_DETAILS.token);
-
-        this.props.navigation.addListener('willFocus', () => {
-            this.onChangeActivityTypeHandler(this.state.selectedCategory)
-        })
     }
 
     componentWillMount() {
-        // this.makeRemoteRequest();
         const {setParams} = this.props.navigation;
         setParams({token :this.state.token});
     }
@@ -57,47 +47,51 @@ export default class CurrentActivitiesScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const {state} = navigation;
         return {
-            headerTitle: "Current Activities",
-            headerRight: (
-                <TouchableOpacity onPress={() => navigation.navigate('NewActivityScreen', {token: state.params.token})}>
-                    <Text style={{fontSize: 30, marginRight: 10, color: "#007aff"}}>+</Text>
-                </TouchableOpacity>
-            ),
+            headerTitle: "Joined Activities"
         };
     };
 
+    componentDidMount() {
+        this.makeRemoteRequest();
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (this.state.selectedCategory !== prevState.selectedCategory && this.state.selectedCategory !== "") {
-            this.onChangeActivityTypeHandler(this.state.selectedCategory);
+            this.onChangeTypeHandler(this.state.selectedCategory);
         }
     }
 
-    onChangeActivityTypeHandler(value) {
-        let link = "";
-        if (value === 'All')
-            link = App.URL + '/activities';
-        else
-            link = App.URL + '/activities/activity/sortBy/' + value;
+    makeRemoteRequest = () => {
         const { page, seed } = this.state;
-        fetch(link)
-            .then(res => res.json())
+        fetch(App.URL + '/users/user/activities/attending', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1Yzg4NDA1NTE5NTE5NTEzZDk4Yzk1YWYiLCJpYXQiOjE1NTI5NDI0MDAwNTcsImV4cCI6MTU1MzAyODgwMDA1N30.rIlKgqeqpkGXarswE6cL3R9gnF9bWwssfzZPcE086qk"
+            }
+        })
+        .then(res => res.json())
             .then(res => {
                 this.setState({
                     data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
                     error: res.error || null,
                     loading: false,
                     refreshing: false,
-                    selectedCategory: this.state.selectedCategory,
+
                 });
             })
             .catch(error => {
                 this.setState({ error, loading: false });
-            });
+            }
+        );
     };
 
-    onChangeSortByHandler(value) {
-        //TODO: update the list of all activities
-    };
+    onBack () {
+        this.makeRemoteRequest();
+    }
+
+
 
 
     render() {
@@ -105,35 +99,16 @@ export default class CurrentActivitiesScreen extends React.Component {
         let sortByCriteria = [{value: 'Time'}];
         return (
             <View style={{flex: 1}}>
-                <View style={styles.dropdown}>
-                    <View style={{ flex: 1 }}>
-                        <Dropdown
-                            label='Activity Type'
-                            data={activityTypes}
-                            onChangeText={value => this.setState({selectedCategory: value})}
-                        />
-                    </View>
-
-                    <View style={{ width: 96, marginLeft: 8 }}>
-                        <Dropdown
-                            label='Sort'
-                            data={sortByCriteria}
-                            onChangeText={value => this.onChangeSortByHandler(value)}
-                            propsExtractor={({ props }, index) => props}
-                        />
-                    </View>
-                </View>
 
                 <FlatList
                     data={this.state.data}
                     keyExtractor={(item, index) => index.toString()}
-                    extraData={this.state.data}
                     renderItem={({item}) => (
                         <ListItem
-                            title={item.title}
-                            subtitle={dateFormat(item.activity_datetime, "dddd, mmmm dS, h:MM TT") + ' - ' + item.location}
+                            title={`${item.title} ${item.title}`}
+                            subtitle={item.description}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
-                            onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
+                            onPress={() => this.props.navigation.navigate('JoinedActivityDetailsPage',
                                 {
                                     activity_id : item._id,
                                     activity_datetime: item.activity_datetime,
@@ -143,6 +118,7 @@ export default class CurrentActivitiesScreen extends React.Component {
                                     title: item.title,
                                     attendance_list: item.attendance_list,
                                     datetime_created: item.datetime_created,
+                                    onBack: this.onBack.bind(this)
                                 })
                             }
                         />

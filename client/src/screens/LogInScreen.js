@@ -1,4 +1,5 @@
 import React from 'react';
+import {AsyncStorage} from 'react-native';
 import {
     Image,
     Platform,
@@ -22,8 +23,8 @@ import { MonoText } from '../components/StyledText';
 
 export default class LogInScreen extends React.Component {
     state = {
-        email: "",
-        password: "",
+        email: "supman@myumanitoba.ca",
+        password: "supping",
         token: "",
     };
 
@@ -38,20 +39,16 @@ export default class LogInScreen extends React.Component {
                     body:  JSON.stringify({"email": email, "password": password}),
                     headers: {
                         'Accept':       'application/json',
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
+                        
                     }
                 })
-                    .then(res =>
-                        res.json()
-                        // console.log("response: " +JSON.stringify(res.json()));
-
-
-                )
+                    .then(res => res.json())
                     .then(response => {
                         console.log("response: " +typeof response.success);
                         if (response.success === true) {
-                            console.log("+++++");
                             this.setState({token: response.token});
+                            AsyncStorage.setItem("AuthToken", response.token)
                             this.props.navigation.navigate('CurrentActivitiesScreen', {
                                 email: this.state.email,
                                 token: this.state.token,
@@ -60,8 +57,8 @@ export default class LogInScreen extends React.Component {
                         else {
                             Alert.alert("Invalid email or password!");
                         }
-                        console.log("jeree");
-                    })
+                    }
+                )
             }
             else {
                 Alert.alert("Please use your @myumanitoba.ca email!");
