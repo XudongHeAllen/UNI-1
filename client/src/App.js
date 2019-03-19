@@ -9,6 +9,8 @@ import SignUpScreen from './screens/SignUpScreen';
 import ActivityDetailsScreen  from './screens/ActivityDetailsScreen';
 import SettingsScreen from "./screens/SettingsScreen";
 import NewActivityScreen from "./screens/NewActivityScreen";
+import UserJoinedActivitiesScreen from "./screens/UserJoinedActivitiesScreen";
+import JoinedActivityDetailsPage from "./screens/JoinedActivityDetailsPage";
 import HomeScreen from "./screens/HomeScreen";
 import LinksScreen from "./screens/LinksScreen";
 
@@ -40,6 +42,8 @@ const MainNavigator = createStackNavigator({
   SettingsScreen: SettingsScreen,
   ActivityDetailsScreen: ActivityDetailsScreen,
   NewActivityScreen: NewActivityScreen,
+  UserJoinedActivitiesScreen : UserJoinedActivitiesScreen,
+  JoinedActivityDetailsPage: JoinedActivityDetailsPage
 });
 
 const AppRoot = createAppContainer(MainNavigator);

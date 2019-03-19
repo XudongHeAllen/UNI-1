@@ -22,9 +22,16 @@ import styles from '../assets/Styles.js';
 import * as App from '../App';
 
 export default class ActivityDetailsScreen extends React.Component {
+
+    componentWillUnmount() {
+        const { navigation } = this.props
+        navigation.state.params.onBack();
+    }
+      
     render() {
         const { navigation } = this.props;
         let icon = setCategoryIcon(navigation.getParam("category"))
+
 
         const activityDetails = {
             activityTitle : navigation.getParam("title"),
@@ -50,19 +57,20 @@ export default class ActivityDetailsScreen extends React.Component {
             }
         }
 
-        function joinActivity(navigation) {
+        function leaveActivity(pageNavigation) {
             AsyncStorage.getItem("AuthToken").then(token =>{
                 if(token) {
                     const activityID = navigation.getParam("activity_id");
-                    fetch(App.URL + '/activities/activity/attend/' + activityID, {
+                    fetch(App.URL + '/activities/activity/unattend/' + activityID, {
                         method: 'PUT',
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json',
                             'Authorization' : token
                         }
-                    }).then(_ => {
-                        navigation.navigate('UserJoinedActivitiesScreen')
+                    }).then(res => {
+                        console.log(res)
+                        pageNavigation.goBack()
                     })
                 }
             })
@@ -79,7 +87,7 @@ export default class ActivityDetailsScreen extends React.Component {
                 <Text>Time of Event: {dateFormat(navigation.getParam("activity_datetime"), "dddd, mmmm dS, h:MM TT")}</Text>
                 <Text>{navigation.getParam("description")}</Text>
                 <TouchableOpacity style={styles.buttonContainer}>
-                    <Text style={styles.buttonText} onPress={() => joinActivity(this.props.navigation)}>Join Activity</Text>
+                    <Text style={styles.buttonText} onPress={() => leaveActivity(this.props.navigation)}>Leave Activity</Text>
                 </TouchableOpacity>
             </View>
         )

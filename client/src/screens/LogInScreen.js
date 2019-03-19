@@ -1,4 +1,5 @@
 import React from 'react';
+import {AsyncStorage} from 'react-native';
 import {
     Image,
     Platform,
@@ -22,8 +23,8 @@ import { MonoText } from '../components/StyledText';
 
 export default class LogInScreen extends React.Component {
     state = {
-        email: "",
-        password: "",
+        email: "supman@myumanitoba.ca",
+        password: "supping",
         token: "",
     };
 
@@ -38,7 +39,8 @@ export default class LogInScreen extends React.Component {
                     body:  JSON.stringify({"email": email, "password": password}),
                     headers: {
                         'Accept':       'application/json',
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
+                        
                     }
                 })
                     .then(res => res.json())
@@ -46,6 +48,7 @@ export default class LogInScreen extends React.Component {
                         console.log("response: " +typeof response.success);
                         if (response.success === true) {
                             this.setState({token: response.token});
+                            AsyncStorage.setItem("AuthToken", response.token)
                             this.props.navigation.navigate('CurrentActivitiesScreen', {
                                 email: this.state.email,
                                 token: this.state.token,
