@@ -18,6 +18,8 @@ import { List, ListItem, SearchBar } from "react-native-elements";
 import ActivityDetailsScreen  from './ActivityDetailsScreen';
 import * as App from '../App';
 
+const dateFormat = require('dateformat');
+
 // const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
 export default class CurrentActivitiesScreen extends React.Component {
@@ -30,7 +32,7 @@ export default class CurrentActivitiesScreen extends React.Component {
             seed: 1,
             error: null,
             refreshing: false,
-            selectedCategory: "",
+            selectedCategory: "All",
             token: "",
         };
         const { navigation } = this.props;
@@ -40,9 +42,14 @@ export default class CurrentActivitiesScreen extends React.Component {
         };
         this.state.token = USER_DETAILS.token;
         console.log("TOKEN: " + USER_DETAILS.token);
+
+        this.props.navigation.addListener('willFocus', () => {
+            this.onChangeActivityTypeHandler(this.state.selectedCategory)
+        })
     }
 
     componentWillMount() {
+        // this.makeRemoteRequest();
         const {setParams} = this.props.navigation;
         setParams({token :this.state.token});
     }
@@ -59,37 +66,13 @@ export default class CurrentActivitiesScreen extends React.Component {
         };
     };
 
-    componentDidMount() {
-        this.makeRemoteRequest();
-    }
-
     componentDidUpdate(prevProps, prevState) {
         if (this.state.selectedCategory !== prevState.selectedCategory && this.state.selectedCategory !== "") {
-            this.onChangeTypeHandler(this.state.selectedCategory);
+            this.onChangeActivityTypeHandler(this.state.selectedCategory);
         }
     }
 
-    makeRemoteRequest = () => {
-        const { page, seed } = this.state;
-
-        fetch(App.URL + '/activities')
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    data: page === 1 ? res.activities : [...this.state.data, ...res.activities],
-                    error: res.error || null,
-                    loading: false,
-                    refreshing: false,
-
-                });
-            })
-            .catch(error => {
-                this.setState({ error, loading: false });
-            }
-        );
-    };
-
-    onChangeTypeHandler(value) {
+    onChangeActivityTypeHandler(value) {
         let link = "";
         if (value === 'All')
             link = App.URL + '/activities';
@@ -144,10 +127,11 @@ export default class CurrentActivitiesScreen extends React.Component {
                 <FlatList
                     data={this.state.data}
                     keyExtractor={(item, index) => index.toString()}
+                    extraData={this.state.data}
                     renderItem={({item}) => (
                         <ListItem
-                            title={`${item.title} ${item.title}`}
-                            subtitle={item.description}
+                            title={item.title}
+                            subtitle={dateFormat(item.activity_datetime, "dddd, mmmm dS, h:MM TT") + ' - ' + item.location}
                             leftAvatar={{ source: require('../assets/images/Octocat.png') }}
                             onPress={() => this.props.navigation.navigate('ActivityDetailsScreen',
                                 {

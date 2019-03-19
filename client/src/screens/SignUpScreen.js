@@ -8,7 +8,7 @@ import{
 	View,
 	Text,
 	Alert,
-	Button
+	Button,
 }from 'react-native';
 import styles from '../assets/Styles.js';
 import * as App from "../App";
@@ -82,7 +82,7 @@ export default class RegisterScene extends React.Component {
 						style={styles.inputBox}>
 						<TextInput
 							ref = "username"
-							onChangeText={text => this.setState({username: text})} //add value changing event
+							onChangeText={(text) => this.setState({username: text})} //add value changing event
 							style={styles.signUpInput}
 							placeholder={'Username'}
 							placeholderTextColor ={'#ccc'}
@@ -98,7 +98,7 @@ export default class RegisterScene extends React.Component {
 						style={styles.inputBox}>
 						<TextInput
 							ref = "emailAddress"
-							onChangeText={text => this.setState({email: text})} //add value changing event
+							onChangeText={(text) => this.setState({email: text})} //add value changing event
 							style={styles.signUpInput}
 							keyboardType="email-address"
 							placeholder={'Email'}
@@ -114,7 +114,7 @@ export default class RegisterScene extends React.Component {
 						style={styles.inputBox}>
 						<TextInput
 							ref = "password"
-							onChangeText={text => this.setState({password: text})} //add value changing event
+							onChangeText={(text) => this.setState({password: text})} //add value changing event
 							style={styles.signUpInput}
 							secureTextEntry={true}
 							placeholderTextColor ={'#ccc'}
@@ -130,7 +130,7 @@ export default class RegisterScene extends React.Component {
 						style={styles.inputBox}>
 						<TextInput
 							ref = "confirmPassword"
-							onChangeText={text => this.setState({confirmedPassword: text})} //add value changing event
+							onChangeText={(text) => this.setState({confirmedPassword: text})} //add value changing event
 							style={styles.signUpInput}
 							placeholder={'Confirm password'}
 							placeholderTextColor ={'#ccc'}

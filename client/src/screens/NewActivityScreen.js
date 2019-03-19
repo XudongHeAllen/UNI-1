@@ -3,6 +3,7 @@ import {AsyncStorage} from 'react-native';
 
 import{
 	Image,
+	Platform,
 	KeyboardAvoidingView,
 	TouchableOpacity,
 	StyleSheet,
@@ -10,22 +11,48 @@ import{
 	View,
 	Text,
 	Alert,
-	Button
+	Button,
 }from 'react-native';
+import { Dropdown } from 'react-native-material-dropdown';
+import DatePicker from 'react-native-datepicker'
 import styles from '../assets/Styles.js';
+import * as App from '../App';
+
+// const URL = 'http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000';
 
 export default class NewActivityScreen extends React.Component {
 
-	name= '';
-	location= '';
-	time='';
-	numberOfPeople='';
-	description = '';
+	//3.15 add variable token to store token
 
-	url = "localhost:"
+	constructor(props){
+		super(props);
+
+		const {navigation} = this.props;
+		//console.log("Token: " + navigation.getParam("token"));
+		const USER_DETAILS ={
+			token : navigation.getParam("token")
+		};
+		console.log("Token: " + USER_DETAILS.token);
+		this.state = {
+			apiData:[],
+			time: this.datetime,
+			selectedCategory: "",
+		}
+		this.token = USER_DETAILS.token;
+		this.name= '';
+		this.location= '';
+		this.time='';
+		this.numberOfPeople='';
+		this.description = '';
+		this.category = '';
+	}
+
+
+
+
 
 	/**when value in inputBox changed, save changed value
-	*/
+	 */
 	onNameChanged = (newName) => {
 		console.log(newName);
 		this.name = newName;
@@ -38,29 +65,28 @@ export default class NewActivityScreen extends React.Component {
 
 	onTimeChanged = (newTime) => {
 		console.log(newTime);
+		this.setState({time: newTime});
 		this.time = newTime;
+		console.log(this.time);
+
 	};
 
 	onNumberOfPeopleChanged = (newNumberOfPeople) => {
 		console.log(newNumberOfPeople);
-		this.numberOfPeople = newNumberOfPeople;
+		this.numberOfPeople = parseInt(newNumberOfPeople);
 	};
 
 	onDescriptionChanged = (newDescription) => {
 		console.log(newDescription);
 		this.description = newDescription;
 	};
-	// click background to let input box lose fources
-
-	/*
-	blurTextInput =() => {
-		this.refs.userName.blur();
-		this.refs.password.blur();
-		this.refs.confirmPassword.blur();
+	onCategoryChanged = (newCategory) =>{
+		console.log(newCategory);
+		this.setState({selectedCategory:newCategory});
+		this.category = newCategory;
+		console.log(this.category);
 	}
-	*/
 
-//Create button, check will write the data into database(not imple yet)
 	createAct =() =>{
 
 		if (this.name != '' && this.location != '' && this.time != ''){
@@ -71,131 +97,177 @@ export default class NewActivityScreen extends React.Component {
 				this.description = "default"
 			}
 			//send  message
-			Alert.alert("Create Activity Success!");
 			//***************add event here*****************
 			this.sendRequest();
 			//need go back to acts menu
 		}
 		else {
-			Alert.alert("You missed something!");			
+			Alert.alert("You missed something!");
 		}
 	};
 
 	sendRequest = (enableCallback) => {
-		AsyncStorage.getItem("AuthToken").then(token => {
-			if(token) {
-				fetch('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities/activity/create', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json',
-						'Authorization' : token
-					},
-					body: JSON.stringify({
-						attendence_list: '',
-						category: 'sports',
-						activity_datetime: "2019-03-05 01:11:49.334",
-						max_attendance: 6,
-						description: "This is where you should be",
-						title: "Where it's at"
-					})
-				})
-					.then((response) => response.json())
-					.then(() => {
-						Alert.alert("Create Activity Success!");
-					})
-					.catch((error) => {
-						console.error(error);
-					});
-
-			}
+		console.log({
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+				'Authorization' : this.token,
+			},
+			body: JSON.stringify({
+				'attendence_list': [],
+				'category': this.category,
+				'activity_datetime': this.time + ':00.334',
+				'max_attendance':this.numberOfPeople,
+				'description': this.description,
+				'title': this.name,
+				'location': this.location
+			})
+		});
+		fetch(App.URL + '/activities/activity/create',{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json',
+				'Authorization' : this.token,
+			},
+			body: JSON.stringify({
+				'attendence_list': [],
+				'category': this.category.toUpperCase(),
+				'activity_datetime': this.time,
+				'max_attendance':this.numberOfPeople,
+				'description': this.description,
+				'title': this.name,
+				'location': this.location
+			})
 		})
+			.then((response) => response.json())
+			.then((responseJson) => {
+				console.log(responseJson);
+				if(responseJson.success == true){
+					console.log(responseJson);
+					Alert.alert("Create Activity Success!");
+					//jump back to current Act Screen
+					this.props.navigation.navigate('CurrentActivitiesScreen');
+				}else{
+					console.log(responseJson);
+					Alert.alert("Fail to Create Activity");
+				}
+
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 
 	render(){
-		const { navigation } = this.props;
 
-		console.log("+++++++" + navigation.getParam("token"));
+		let activityTypes = [{value: 'Sports'}, {value: 'Study'}, {value: 'Dance'}, {value: 'Politics'}, {value: 'Art'}, {value: 'Music'}];
+
 		return (
 			<TouchableOpacity	//using touchable opacity as background
-				activeOpacity={1.0}	//when clicked change active 
+				activeOpacity={1.0}	//when clicked change active
 				//onPress={this.blurTextInput} //add click event
 				style={styles.signUpContainer}>
 				<KeyboardAvoidingView behavior = "padding" style = {styles.signUpContainer}>
-				<View style={styles.logoContainer}>
-                    <Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
-                    <Text style={styles.title}>Create Activity</Text>
-                </View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "name"
-						onChangeText={this.onNameChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholder={'Name of Activity'}
-						placeholderTextColor ={'#ccc'}
-						clearButtonMode="while-editing"
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						autoCorrect={false}
-						underlineColorAndroid={'transparent'} //cancel under line
+					<View style={styles.logoContainer}>
+						<Image style={styles.logo} source={require('../assets/images/Octocat.png')}/>
+						<Text style={styles.title}>Create Activity</Text>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "name"
+							onChangeText={this.onNameChanged} //add value changing event
+							style={styles.signUpInput}
+							placeholder={'Name of Activity'}
+							placeholderTextColor ={'#ccc'}
+							clearButtonMode="while-editing"
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							autoCorrect={false}
+							underlineColorAndroid={'transparent'} //cancel under line
+						/>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "location"
+							onChangeText={this.onLocationChanged} //add value changing event
+							style={styles.signUpInput}
+							placeholder={'Location of Activity'}
+							placeholderTextColor ={'#ccc'}
+							clearButtonMode="while-editing"
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							autoCorrect={false}
+							underlineColorAndroid={'transparent'} //cancel under line
+						/>
+					</View>
+
+					<View style={styles.dropdown}>
+						<View style={{ flex: 1 }}>
+							<Dropdown
+								label='Activity Type'
+								data={activityTypes}
+								// onChangeText={value => {this.componentDidUpdate(this.props)}}
+								onChangeText={this.onCategoryChanged}
+							/>
+						</View>
+					</View>
+
+
+					<DatePicker
+						style={{width:200}}
+						date ={this.state.time}
+						mode="datetime"
+						placeholder= {this.time}
+						format = "YYYY-MM-DD HH:mm"
+						minDate="2019-03-15"
+						maxDate="2029-03-15"
+						confirmBtnText="Confirm"
+						cancelBtnText="Cancel"
+						customStyles={{
+							dateIcon: {
+								position: 'absolute',
+								left: 0,
+								top: 4,
+								marginLeft: 0
+							},
+							dateInput: {
+								marginLeft: 36
+							}
+						}}
+						minuteInterval={10}
+						onDateChange={this.onTimeChanged}
 					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "location"
-						onChangeText={this.onLocationChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholder={'Location of Activity'}
-						placeholderTextColor ={'#ccc'}
-						clearButtonMode="while-editing"
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						autoCorrect={false}
-						underlineColorAndroid={'transparent'} //cancel under line												
-					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "time"
-						onChangeText={this.onTimeChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholderTextColor ={'#ccc'}
-						placeholder={'Time of Activity'}
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "numberOfPeople"
-						onChangeText={this.onNumberOfPeopleChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholder={'Number of People (Optional)'}
-						placeholderTextColor ={'#ccc'}
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-					/>
-				</View>
-				<View
-					style={styles.inputBox}>
-					<TextInput
-						ref = "description"
-						onChangeText={this.onDescriptionChanged} //add value changing event
-						style={styles.signUpInput}
-						placeholder={'Description (Optional)'}
-						placeholderTextColor ={'#ccc'}
-						returnKeyType="next"
-						autoCapitalize='none' //cancel first letter capital
-						underlineColorAndroid={'transparent'} //cancel under line
-					/>
-				</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "numberOfPeople"
+							onChangeText={this.onNumberOfPeopleChanged} //add value changing event
+							style={styles.signUpInput}
+							placeholder={'Number of People (Optional)'}
+							placeholderTextColor ={'#ccc'}
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							underlineColorAndroid={'transparent'} //cancel under line
+						/>
+					</View>
+					<View
+						style={styles.inputBox}>
+						<TextInput
+							ref = "description"
+							onChangeText={this.onDescriptionChanged} //add value changing event
+							style={styles.signUpInput}
+							placeholder={'Description (Optional)'}
+							placeholderTextColor ={'#ccc'}
+							returnKeyType="next"
+							autoCapitalize='none' //cancel first letter capital
+							underlineColorAndroid={'transparent'} //cancel under line
+						/>
+					</View>
 
 
 				</KeyboardAvoidingView>
@@ -205,7 +277,7 @@ export default class NewActivityScreen extends React.Component {
 					<Text
 						style={styles.btText}>Create Activity</Text>
 				</TouchableOpacity>
-				
+
 			</TouchableOpacity>
 		);
 	}
