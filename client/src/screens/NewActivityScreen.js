@@ -107,57 +107,42 @@ export default class NewActivityScreen extends React.Component {
 	};
 
 	sendRequest = (enableCallback) => {
-		console.log({
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json',
-				'Authorization' : this.token,
-			},
-			body: JSON.stringify({
-				'attendence_list': [],
-				'category': this.category,
-				'activity_datetime': this.time + ':00.334',
-				'max_attendance':this.numberOfPeople,
-				'description': this.description,
-				'title': this.name,
-				'location': this.location
+		AsyncStorage.getItem("AuthToken").then(token => {
+			fetch(App.URL + '/activities/activity/create',{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Authorization' : token,
+				},
+				body: JSON.stringify({
+					'attendence_list': [],
+					'category': this.category.toUpperCase(),
+					'activity_datetime': this.time,
+					'max_attendance':this.numberOfPeople,
+					'description': this.description,
+					'title': this.name,
+					'location': this.location
+				})
 			})
-		});
-		fetch(App.URL + '/activities/activity/create',{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/json',
-				'Authorization' : this.token,
-			},
-			body: JSON.stringify({
-				'attendence_list': [],
-				'category': this.category.toUpperCase(),
-				'activity_datetime': this.time,
-				'max_attendance':this.numberOfPeople,
-				'description': this.description,
-				'title': this.name,
-				'location': this.location
-			})
+				.then((response) => response.json())
+				.then((responseJson) => {
+					console.log(responseJson);
+					if(responseJson.success == true){
+						console.log(responseJson);
+						Alert.alert("Create Activity Success!");
+						//jump back to current Act Screen
+						this.props.navigation.navigate('CurrentActivitiesScreen');
+					}else{
+						console.log(responseJson);
+						Alert.alert("Fail to Create Activity");
+					}
+	
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 		})
-			.then((response) => response.json())
-			.then((responseJson) => {
-				console.log(responseJson);
-				if(responseJson.success == true){
-					console.log(responseJson);
-					Alert.alert("Create Activity Success!");
-					//jump back to current Act Screen
-					this.props.navigation.navigate('CurrentActivitiesScreen');
-				}else{
-					console.log(responseJson);
-					Alert.alert("Fail to Create Activity");
-				}
-
-			})
-			.catch((error) => {
-				console.error(error);
-			});
 	};
 
 
