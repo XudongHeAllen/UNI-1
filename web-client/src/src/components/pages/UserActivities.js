@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-awesome-modal';
+import '../../App.css';
 
 class UserActivities extends React.Component{
     constructor(props) {
@@ -25,7 +26,12 @@ class UserActivities extends React.Component{
         return (
             <div className='item'>
                 <div className="content">
-                    <a className="header" onClick={() => this.openModal()}>{this.props.title}</a>
+                    <button
+                        type="button"
+                        id="link-button"
+                        onClick={() => this.openModal()}>
+                        {this.props.title}
+                    </button>
                     <div className="description">
                         category: {this.props.category}
                     </div>
@@ -41,11 +47,12 @@ class UserActivities extends React.Component{
                         onClickAway={() => this.closeModal()}
                     >
 
-
                         <div>
                             <div className="item">
                                 <div className="content">
-                                    <a className="header">TITLE: {this.props.title}</a>
+                                    <div className="header">
+                                        TITLE: {this.props.title}
+                                    </div>
                                     <div className="meta">
                                         <span className="cinema">LOCATION: {this.props.location}</span>
                                     </div>
