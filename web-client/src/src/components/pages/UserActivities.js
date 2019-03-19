@@ -1,20 +1,82 @@
 import React from 'react';
+import Modal from 'react-awesome-modal';
 
-const UserActivities = (props) => {
-    return (
-        <div className='item'>
-            <div className="content">
-                <a className="header" onClick={props.click}>{props.title}</a>
-                <div className="description">
-                    category: {props.category}
-                </div>
-                <div className="extra">
-                    time: {props.time}
+class UserActivities extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible : false
+        }
+    }
+
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
+    render() {
+        return (
+            <div className='item'>
+                <div className="content">
+                    <a className="header" onClick={() => this.openModal()}>{this.props.title}</a>
+                    <div className="description">
+                        category: {this.props.category}
+                    </div>
+                    <div className="extra">
+                        time: {this.props.time}
+                    </div>
+
+                    <Modal
+                        visible={this.state.visible}
+                        width="400"
+                        height="300"
+                        effect="fadeInUp"
+                        onClickAway={() => this.closeModal()}
+                    >
+
+
+                        <div>
+                            <div className="item">
+                                <div className="content">
+                                    <a className="header">TITLE: {this.props.title}</a>
+                                    <div className="meta">
+                                        <span className="cinema">LOCATION: {this.props.location}</span>
+                                    </div>
+                                    <div className="description">
+                                        <li>WHO: {this.props.attendances}</li>
+                                        <li>category: {this.props.category}</li>
+                                        <li>createdTime: {this.props.createdTime}</li>
+                                        <li>description: {this.props.description}</li>
+                                    </div>
+                                    <div className="extra">
+                                        <div className="ui label">MAX: {this.props.capacity}</div>
+                                        <br/>
+                                        <div className="ui label">
+                                            <i className="globe icon"/> ACTIVITY TIME: {this.props.time}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                        </div>
+
+
+                    </Modal>
                 </div>
             </div>
+        );
+    }
 
-        </div>
-    )
-};
+}
 
 export default UserActivities;
