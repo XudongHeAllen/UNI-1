@@ -7,6 +7,7 @@ const musicIcon = require("../assets/images/music.png")
 const politicsIcon = require("../assets/images/politics.png")
 
 import React from 'react';
+import {AsyncStorage} from 'react-native';
 import {
     Image,
     Platform,
@@ -50,17 +51,20 @@ export default class ActivityDetailsScreen extends React.Component {
         }
 
         function joinActivity(navigation) {
-
-            const activityID = navigation.getParam("activity_id");
-            fetch(App.URL + '/activities/activity/attend/' + activityID, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization' : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1Yzg4NDA1NTE5NTE5NTEzZDk4Yzk1YWYiLCJpYXQiOjE1NTI5NDI0MDAwNTcsImV4cCI6MTU1MzAyODgwMDA1N30.rIlKgqeqpkGXarswE6cL3R9gnF9bWwssfzZPcE086qk"
+            AsyncStorage.getItem("AuthToken").then(token =>{
+                if(token) {
+                    const activityID = navigation.getParam("activity_id");
+                    fetch(App.URL + '/activities/activity/attend/' + activityID, {
+                        method: 'PUT',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization' : token
+                        }
+                    }).then(_ => {
+                        navigation.navigate('UserJoinedActivitiesScreen')
+                    })
                 }
-            }).then(_ => {
-                navigation.navigate('UserJoinedActivitiesScreen')
             })
         }
 

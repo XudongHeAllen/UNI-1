@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {AsyncStorage} from 'react-native';
+
 import{
 	Image,
 	KeyboardAvoidingView,
@@ -80,28 +82,34 @@ export default class NewActivityScreen extends React.Component {
 	};
 
 	sendRequest = (enableCallback) => {
-		Alert.alert("Create Activity Success!");
-		fetch('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities/activity/create',{
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-			},
-			body: JSON.stringify({
-				attendence_list: '',
-				category: 'sports',
-				activity_datetime: "2019-03-05 01:11:49.334",
-				max_attendance:6,
-				description: "This is where you should be",
-				title: "Where it's at"
-			})
+		AsyncStorage.getItem("AuthToken").then(token => {
+			if(token) {
+				fetch('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/activities/activity/create', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+						'Authorization' : token
+					},
+					body: JSON.stringify({
+						attendence_list: '',
+						category: 'sports',
+						activity_datetime: "2019-03-05 01:11:49.334",
+						max_attendance: 6,
+						description: "This is where you should be",
+						title: "Where it's at"
+					})
+				})
+					.then((response) => response.json())
+					.then(() => {
+						Alert.alert("Create Activity Success!");
+					})
+					.catch((error) => {
+						console.error(error);
+					});
+
+			}
 		})
-		.then((response) => response.json())
-		.then((response) => {
-      		console.log(response);
-    	})
-    	.catch((error) => {
-      		console.error(error);
-    	});
 	};
 
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import {AsyncStorage} from 'react-native';
 import {
     Image,
     Platform,
@@ -47,6 +48,7 @@ export default class LogInScreen extends React.Component {
                         console.log("response: " +typeof response.success);
                         if (response.success === true) {
                             this.setState({token: response.token});
+                            AsyncStorage.setItem("AuthToken", response.token)
                             this.props.navigation.navigate('CurrentActivitiesScreen', {
                                 email: this.state.email,
                                 token: this.state.token,
