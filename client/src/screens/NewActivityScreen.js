@@ -125,24 +125,24 @@ export default class NewActivityScreen extends React.Component {
 					'location': this.location
 				})
 			})
-				.then((response) => response.json())
-				.then((responseJson) => {
+			.then((response) => response.json())
+			.then((responseJson) => {
+				console.log(responseJson);
+				if (responseJson.success == true) {
 					console.log(responseJson);
-					if(responseJson.success == true){
-						console.log(responseJson);
-						Alert.alert("Create Activity Success!");
-						//jump back to current Act Screen
-						this.props.navigation.navigate('CurrentActivitiesScreen');
-					}else{
-						console.log(responseJson);
-						Alert.alert("Fail to Create Activity");
-					}
-	
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-		})
+					Alert.alert("Create Activity Success!");
+					//jump back to current Act Screen
+					this.props.navigation.navigate('CurrentActivitiesScreen');
+				} else {
+					console.log(responseJson);
+					Alert.alert("Fail to Create Activity");
+				}
+
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		}).catch(error => console.log(error))
 	};
 
 
