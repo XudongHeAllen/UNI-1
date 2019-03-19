@@ -76,7 +76,7 @@ class UserActivities extends React.Component{
 
                             <button
                                 className='small ui primary button'
-                                onClick="">
+                                onClick={() => this.closeModal()}>
                                 Join
                             </button>
                             <button
