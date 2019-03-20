@@ -14,7 +14,7 @@ mongoose.connect("mongodb://testUser:testUser@cluster0-shard-00-00-twf8g.mongodb
 
 var app = express();
 
-
+//this are middleware
 //middleware
 //middlewares are run in sequence
 app.use(morgan('dev'));//morgan logs the calls to the routes
