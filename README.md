@@ -6,11 +6,12 @@ The elevator pitch as presented to John Braico:
 
 UNI is an application that will allow University of Manitoba students create sport or study events on campus and will allow other students that have an interest in that event to join in. This will fulfill the desire for students to meet other students with similar interests.
 
-## To run the web client, navigate into web-client/src and run the following command(s):
+## To run the web client, navigate into web-client and run the following command(s):
 
 `npm install`
+### NOTE: DO NOT RUN `npm install` IN THE web-client DIRECTORY AS THIS WOULD LEAD TO ERRORS!
 
-And then 
+**Then navigate into web-client/src and run the following command(s)** 
 
 `npm start App.js`
 
