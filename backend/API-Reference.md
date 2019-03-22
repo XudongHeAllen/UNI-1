@@ -162,7 +162,6 @@ HTTP 200 Content-Type: application/json
             "max_attendance": 4,
             "title": "Salsa Dancer"
         },
-        ...
     ]
 }
 ```
@@ -380,6 +379,7 @@ This endpoint will return a list of sorted activities based on the category prov
             "title": "Basquiat chat",
             "location": "swimming pool"
         }
+    ]
 }
 ```
 
@@ -416,4 +416,26 @@ This endpoint will return a list of activities that the user has attended or is 
         }
     ]
 }
+```
+
+## Deleting a user's activity
+
+### Request
+
+```
+DELETE users/user/activities/activity/delete/:id
+```
+
+This endpoint will delete an activity that the user has created.
+
+**Note that this endpoint DOES require authorization.**
+
+#### Example Successful Response
+
+```
+HTTP 200 Content-Type: application/json
+```
+
+```json
+{"success":true,"info":"Activity removed successfully"}
 ```

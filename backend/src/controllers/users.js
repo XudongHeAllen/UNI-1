@@ -147,4 +147,43 @@ module.exports = {
             });
         })(req, res, next);
     },
+
+    deleteMyActivity: async (req, res, next) => {
+        passport.authenticate('jwt', {session: false}, async (err, user, info) => {
+            const data = req.body;
+            const activityId = req.params.id;
+            console.log("\n\nMy activity id is:" + activityId);
+            // look for the activity by id
+            Activity.find({_id: activityId}, async function (db_err, db_response) {
+                if(db_err) {
+                    res.json({
+                        success: false,
+                        info: "Database error deleting the activity."
+                    });
+                    next();
+                }
+                else if (err){
+                    return res.status(500).json({
+                        success:false,
+                        info: err
+                    });
+                }
+                else if (!user) {
+                    return res.status(401).json({
+                        success: false,
+                        user: user,
+                        info: info.message
+                    });
+                }
+                else {
+                    // delete the activity
+                    await Activity.remove({_id: activityId});
+                    res.json({
+                        success: true,
+                        info: "Activity removed successfully"
+                    })
+                }
+            });
+        })(req, res, next);
+    },
 }
