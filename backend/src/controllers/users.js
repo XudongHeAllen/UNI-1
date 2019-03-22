@@ -4,6 +4,8 @@ const Activity = require('../models/activities');
 const { JWT_SECRET } = require('../configuration');
 const passport = require('passport');
 
+const ObjectId = require('mongoose').Types.ObjectId;
+
 signToken = user => {
     return JWT.sign({
         iss: 'UNI', //issuer
@@ -186,4 +188,39 @@ module.exports = {
             });
         })(req, res, next);
     },
+
+    myActivities: async (req, res, next) => {
+        passport.authenticate('jwt', {session: false}, async (err, user, info) => {
+            const userActivities = user.my_activities;
+            let actualActivityIds = userActivities.map(s =>ObjectId(s));
+
+            Activity.find({_id:{$in: actualActivityIds}}, async function (db_err, db_response) {
+                if (db_err) {
+                    res.status(500).json({
+                        success: false,
+                        info: "Database error occurred. "+db_err
+                    });
+                }else if (err){
+                    res.status(500).json({
+                        success: false,
+                        info: err
+                    });
+                }else if (!user){
+                    res.status(401).json({
+                        success: false,
+                        user: user,
+                        info: info.message
+                    });
+                }else{
+                    // Return the details about the activity for the user
+                    res.status(200).json({
+                        success: true,
+                        info: "Details of the user's activities sucessfully retrieved.",
+                        my_activities: db_response
+                    })
+                }
+
+            })
+        })(req, res, next);
+    }
 }

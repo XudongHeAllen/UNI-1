@@ -10,7 +10,7 @@ const activityController = require('../controllers/activities');
 
 router.route('/signup')
 //validate makes sure the data is valid
-//if not it sends a response without calling the usersController 
+//if not it sends a response without calling the usersController
     .post(validateBody(schemas.authSchema),UsersController.signUp);
 
 router.route('/signin')
@@ -24,5 +24,8 @@ router.route('/user/activities/attending')
 
 router.route('/user/activities/activity/delete/:id')
 	.delete(UsersController.deleteMyActivity);
+
+router.route('/user/myActivities')
+    .get(validateBody(activitySchema.authSchema), UsersController.myActivities);
 
 module.exports = router;

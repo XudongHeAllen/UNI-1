@@ -57,9 +57,9 @@ module.exports = {
             const data = req.body;
             Activity.create(data, async function (db_err, db_response) {
                 if(db_err) {
-                    res.json({
+                    res.status(401).json({
                         success: false,
-                        info: "Database error Adding the activity was unsuccessful."
+                        info: "Database error Adding the activity was unsuccessful."+db_err.message
                     });
                     next();
                 }
