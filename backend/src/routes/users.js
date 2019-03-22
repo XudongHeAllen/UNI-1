@@ -10,7 +10,7 @@ const activityController = require('../controllers/activities');
 
 router.route('/signup')
 //validate makes sure the data is valid
-//if not it sends a response without calling the usersController
+//if not it sends a response without calling the usersController 
     .post(validateBody(schemas.authSchema),UsersController.signUp);
 
 router.route('/signin')
