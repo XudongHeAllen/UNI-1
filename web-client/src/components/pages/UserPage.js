@@ -42,12 +42,13 @@ class UserPage extends React.Component {
                 <Sidebar
                     pageWrapId={"page-wrap"} 
                     outerContainerId={"App"}
-                    width={ "25%" }
-                    name={this.props.location.state.stateName} 
+                    width={ "20%" }
+                    email={this.props.location.state.stateName}
+                    createActivity={this.createActivityHandler}
                 />
 
                 <div id="page-wrap">
-                      <Segment>
+                    <Segment>
                         <h2>welcome, {this.props.location.state.stateName}!</h2>
 
                         <button
