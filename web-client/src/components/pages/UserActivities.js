@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-awesome-modal';
 import '../../App.css';
 import axios from "../../axios_def";
+import ActivityIsFull from "../messages/ActivityIsFull";
 
 class UserActivities extends React.Component{
     constructor(props) {
@@ -9,20 +10,28 @@ class UserActivities extends React.Component{
         this.state = {
             visible : false,
             attend : false,
-            full : false
+            full : false,
+            token : this.props.token,
+            activityID : this.props.activityID
         }
 
+        /*
+            TODO: only creator can see the attendances    --waiting for backend API, My Activities
+                  join button depends on activity capacity  --done
+                  delete the activity
+                  show activities by date
+                  when create, send two request, one post one put
+                    to let the creator automatically join  --yinka
+                  when send request, do not need whole url, just after 8000, see axios_def.js  -- yinka
+                  maybe fix the style of creating activity modal to activity detail modal  -- yinka
+                  reload the page after creation. maybe use "window.location.reload();" for now -- yinka
+                  and after creation, the activity list is [], I think it should be null -- yinka
+                  delete InlineError.js and SignUpPage.js files
+        */
         //TODO: how to know the creator of this activity, maybe need to change the structure of the database？
-
-
     }
 
     openModal() {
-        console.log("Iam user: "+this.props.userID);
-        //console.log(this.props.attendances.length);
-        //console.log(this.props.attendances);
-        //console.log(this.props.attendances[0]);
-
         let attend = false;
         let attendanceCount = this.props.attendances.length;
         let index = 0;
@@ -50,35 +59,39 @@ class UserActivities extends React.Component{
     }
 
     joinActivityHandler = () => {
+        let attendanceCount = this.props.attendances.length;
+        let maxAttendance = this.props.capacity;
 
-        const token = this.props.token;
+        if(attendanceCount === maxAttendance){
+            alert("the activity is full");
+            //TODO: need to popup ActivityIsFull component which is under messages folder.
+        }else if(attendanceCount < maxAttendance){
+            const helper= {
+                headers: {"Authorization": '' + this.state.token,
+                    "Content-Type": "application/json"}
+            };
 
-        console.log("this is the token: "+token);
+            axios.put('/activities/activity/attend/' + this.state.activityID ,{},helper).then(res => {
+                console.log(res);
+                window.location.reload();
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    };
 
+    unJoinActivityHandler = () => {
         const helper= {
-            headers: {"Authorization": '' + token}
+            headers: {"Authorization": '' + this.state.token,
+                "Content-Type": "application/json"}
         };
 
-        // axios.get('/users/user/activities/attending',helper).then(res => {
-        //     const activities = res.data.activities;
-        //     console.log(activities);
-        //     console.log(token);
-        // }).catch((error) => {
-        //     console.log(error);
-        // });
-
-
-        console.log("this is the end");
-
-        axios.put('/activities/activity/attend/5c9176bacdd524087e7e3a9e',{},helper).then(res => {
+        axios.put('/activities/activity/unattend/' + this.state.activityID ,{},helper).then(res => {
             console.log(res);
-            console.log(token);
+            window.location.reload();
         }).catch((error) => {
             console.log(error);
         });
-
-        //console.log(this.props.activityID);
-        //console.log("joined");
     };
 
 
@@ -146,7 +159,7 @@ class UserActivities extends React.Component{
                             {this.state.attend && (
                                 <button
                                     className='small ui primary button'
-                                    onClick={() => this.closeModal()}>
+                                    onClick={this.unJoinActivityHandler}>
                                     unJoin
                                 </button>
                             )}
