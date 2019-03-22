@@ -20,10 +20,36 @@ class UserPage extends React.Component {
 
     };
 
+    showUserActivityHandler = () => {
+        console.log("this is top");
+        console.log(this.props.location.state.token);
+        console.log("this is bottom");
+
+        const token = this.props.location.state.token;
+
+        const helper= {
+            headers: {"Authorization": '' + token,
+                "Content-Type": "application/json"}
+        };
+
+        //TODO: waiting for backend guy to finish up the owner of activity.
+        axios.get('/users/user/activities/attending',helper).then(res => {
+            const activities = res.data.activities;
+            console.log(activities);
+            console.log(token);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+    }
+
     componentDidMount() {
+        //got userId here. console.log(this.props);
         axios.get('/activities').then(res => {
             const activities = res.data.activities;
             this.setState({ activities });
+        }).catch((error) => {
+            console.log(error);
         });
     }
 
@@ -57,11 +83,18 @@ class UserPage extends React.Component {
                             Create Activity
                         </button>
 
+                          <button
+                              className='medium ui primary button'
+                              onClick={this.showUserActivityHandler}>
+                              My Activities
+                          </button>
+
                         <div className='ui items'>
                             {
                                 this.state.activities.map(
                                     activity => <UserActivity
                                                     key={activity._id}
+                                                    activityID={activity._id}
                                                     time={activity.activity_datetime}
                                                     attendances={activity.attendance_list}
                                                     category={activity.category}
@@ -70,6 +103,8 @@ class UserPage extends React.Component {
                                                     capacity={activity.max_attendance}
                                                     title={activity.title}
                                                     location={activity.location}
+                                                    userID = {this.props.location.state.userId}
+                                                    token = {this.props.location.state.token}
                                     />
                                 )
                             }
