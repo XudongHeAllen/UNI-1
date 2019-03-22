@@ -107,7 +107,8 @@ class LoginBox extends React.Component {
             password: "",
             invalidUser:false,
             errors: [],
-            token:null
+            token: null,
+            userId: null
         };
     }
     showValidationErr(elm, msg) {
@@ -160,8 +161,11 @@ class LoginBox extends React.Component {
             };
             axios.post('http://ec2-99-79-39-110.ca-central-1.compute.amazonaws.com:8000/users/signin', userInfo).then( (res) => {
                 if(res.data.success) {
-                    this.setState({token: res.data.token});
-                    this.setState({toUserPage: true});
+                    //console.log("Iam the user" + res.data.user._id);
+                    this.setState({token: res.data.token, toUserPage: true, userId: res.data.user._id});
+                    //this.setState({toUserPage: true});
+                    //console.log("Iam the user" + res.data.user._id);
+                    //this.setState({userId: res.data.user._id});
                 }
             }).catch(error => {
                 this.setState({invalidUser: true});
@@ -185,7 +189,7 @@ class LoginBox extends React.Component {
         }
 
         if(this.state.toUserPage === true ){
-            return (<Redirect to = {{pathname : '/user' , state: { stateName: this.state.email, token: this.state.token}}}/>);
+            return (<Redirect to = {{pathname : '/user' , state: { stateName: this.state.email, token: this.state.token, userId: this.state.userId}}}/>);
         }
 
         else if (this.state.invalidUser === true){
