@@ -4,6 +4,9 @@ const Activity = require('../models/activities');
 const { JWT_SECRET } = require('../configuration');
 const passport = require('passport');
 
+const ObjectId = require('mongoose').Types.ObjectId;
+
+
 signToken = user => {
     return JWT.sign({
         iss: 'UNI', //issuer
@@ -146,5 +149,32 @@ module.exports = {
                 }
             });
         })(req, res, next);
+    },
+    attendanceList: async (req, res, next) => {
+        try {
+            const query = {_id: new ObjectId(req.params.id)};
+            //const query = { attendance_list: { $all: [] } };
+
+            await Activity.find(query, function (err, activity) {
+                if (err) {
+                    res.json({
+                        success: false,
+                        info: "Something went terribly wrong"
+                    });
+                    next();
+                }
+                res.json({
+                    success: true,
+                    info: "Successfully found attendance list of required activity",
+                    attendanceList: activity[0].attendance_list
+                })
+            })
+        } catch(err){
+            res.status(400).json({
+                success: false,
+                info: err.message,
+                activity: null
+            })
+        }
     },
 }
