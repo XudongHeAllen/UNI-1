@@ -12,13 +12,30 @@ import CreateActivity from './CreateActivity';
 class UserPage extends React.Component {
     state = {
         activities: [],
-        displayCreateModal:false
+        displayCreateModal:false,
+        dataBaseUpdate:false
     };
 
     createActivityHandler = () => {
         this.refs.createModal.open();
 
     };
+
+    updateDB = () => {
+        this.setState({dataBaseUpdate:true});
+    };
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.dataBaseUpdate !== this.state.dataBaseUpdate){
+
+            axios.get('/activities').then(res => {
+                const activities = res.data.activities;
+                this.setState({ activities });
+            }).catch((error) => {
+                console.log(error);
+            });
+            this.setState({dataBaseUpdate:false});
+        }
+    }
 
     showUserActivityHandler = () => {
         console.log("this is top");
@@ -41,7 +58,7 @@ class UserPage extends React.Component {
             console.log(error);
         });
 
-    }
+    };
 
     componentDidMount() {
         //got userId here. console.log(this.props);
@@ -63,6 +80,7 @@ class UserPage extends React.Component {
                     ref ="createModal"
                     token = {this.props.location.state.token}
                     display={this.state.displayCreateModal}
+                    updateDB = {this.updateDB}
                 />
 
                 <Sidebar

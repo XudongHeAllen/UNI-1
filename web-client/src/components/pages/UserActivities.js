@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from 'react-awesome-modal';
 import '../../App.css';
 import axios from "../../axios_def";
-import ActivityIsFull from "../messages/ActivityIsFull";
 
 class UserActivities extends React.Component{
     constructor(props) {
