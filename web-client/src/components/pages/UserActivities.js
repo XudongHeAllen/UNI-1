@@ -50,22 +50,7 @@ class UserActivities extends React.Component{
     }
 
     joinActivityHandler = () => {
-        //const id = this.props.activityID;
-        // const token = this.props.token;
-        //
-        // console.log(token);
-        //
-        // const helper= {
-        //     headers: {"Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1YzhmZmFhMGNkZDUyNDA4N2U3ZTNhNmYiLCJpYXQiOjE1NTMyMTMyODY0OTgsImV4cCI6MTU1MzI5OTY4NjQ5OH0.YVt982StxFLfesEka4_pYN8fm6221JEqiDNn7OtHSXo",
-        //         "Content-Type": "application/json"}
-        // };
-        //
-        // axios.put('/activities/activity/attend/5c9176bacdd524087e7e3a9e', { headers: {"Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJVTkkiLCJzdWIiOiI1YzhmZmFhMGNkZDUyNDA4N2U3ZTNhNmYiLCJpYXQiOjE1NTMyMTMyODY0OTgsImV4cCI6MTU1MzI5OTY4NjQ5OH0.YVt982StxFLfesEka4_pYN8fm6221JEqiDNn7OtHSXo",
-        //         "Content-Type": "application/json"}}).then(res => {
-        //     console.log(res.data);
-        // }).catch((error) => {
-        //     console.log(error);
-        // });
+
         const token = this.props.token;
 
         console.log("this is the token: "+token);
@@ -74,24 +59,23 @@ class UserActivities extends React.Component{
             headers: {"Authorization": '' + token}
         };
 
-        axios.get('/users/user/activities/attending',helper).then(res => {
-            const activities = res.data.activities;
-            console.log(activities);
-            console.log(token);
-        }).catch((error) => {
-            console.log(error);
-        });
-
-
-        console.log("this is the end");
-
-        // axios.put('/activities/activity/attend/5c9176bacdd524087e7e3a9e',helper).then(res => {
+        // axios.get('/users/user/activities/attending',helper).then(res => {
         //     const activities = res.data.activities;
         //     console.log(activities);
         //     console.log(token);
         // }).catch((error) => {
         //     console.log(error);
         // });
+
+
+        console.log("this is the end");
+
+        axios.put('/activities/activity/attend/5c9176bacdd524087e7e3a9e',{},helper).then(res => {
+            console.log(res);
+            console.log(token);
+        }).catch((error) => {
+            console.log(error);
+        });
 
         //console.log(this.props.activityID);
         //console.log("joined");
